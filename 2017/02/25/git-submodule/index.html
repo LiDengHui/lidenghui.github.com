@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://lidenghui.github.io/2017/02/25/git-submodule/index.html">
 <meta property="og:site_name" content="LiDengHui` Blog">
 <meta property="og:description" content="git submodule 的基本使用">
-<meta property="og:updated_time" content="2017-02-25T14:44:52.000Z">
+<meta property="og:updated_time" content="2017-02-25T14:45:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git submodule">
 <meta name="twitter:description" content="git submodule 的基本使用">
@@ -260,7 +260,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>开发过程中，经常会有一些通用的部分希望抽取出来做成一个公共库来提供给别的工程来使用，而公共代码库的版本管理是个麻烦的事情。今天无意中发现了Git的git submodule命令，之前的问题迎刃而解了。<br>添加<br>为当前工程添加submodule，命令如下：<br>    git submodule add 仓库地址 路径<br>其中，仓库地址是指子模块仓库地址，路径指将子模块放置在当前工程下的路径。<br>注意：路径不能以 / 结尾（会造成修改不生效）、不能是现有工程已有的目录（不能順利 Clone）<br>命令执行完成，会在当前工程根路径下生成一个名为“.gitmodules”的文件，其中记录了子模块的信息。添加完成以后，再将子模块所在的文件夹添加到工程中即可。<br>删除<br>submodule的删除稍微麻烦点：首先，要在“.gitmodules”文件中删除相应配置信息。然后，执行“git rm –cached ”命令将子模块所在的文件从git中删除。<br>下载的工程带有submodule<br>当使用git clone下来的工程中带有submodule时，初始的时候，submodule的内容并不会自动下载下来的，此时，只需执行如下命令：<br>    git submodule update –init –recursive<br>即可将子模块内容下载下来后工程才不会缺少相应的文件。</p>
+        <p>开发过程中，经常会有一些通用的部分希望抽取出来做成一个公共库来提供给别的工程来使用，而公共代码库的版本管理是个麻烦的事情。今天无意中发现了Git的git submodule命令，之前的问题迎刃而解了。<br>添加<br>为当前工程添加submodule，命令如下：</p>
+<pre><code>git submodule add 仓库地址 路径
+</code></pre><p>其中，仓库地址是指子模块仓库地址，路径指将子模块放置在当前工程下的路径。<br>注意：路径不能以 / 结尾（会造成修改不生效）、不能是现有工程已有的目录（不能順利 Clone）<br>命令执行完成，会在当前工程根路径下生成一个名为“.gitmodules”的文件，其中记录了子模块的信息。添加完成以后，再将子模块所在的文件夹添加到工程中即可。<br>删除<br>submodule的删除稍微麻烦点：首先，要在“.gitmodules”文件中删除相应配置信息。然后，执行“git rm –cached ”命令将子模块所在的文件从git中删除。<br>下载的工程带有submodule<br>当使用git clone下来的工程中带有submodule时，初始的时候，submodule的内容并不会自动下载下来的，此时，只需执行如下命令：</p>
+<pre><code>git submodule update --init --recursive
+</code></pre><p>即可将子模块内容下载下来后工程才不会缺少相应的文件。</p>
 
       
     </div>
@@ -272,7 +276,7 @@
         <p><span>本文标题:</span><a href="/blog/2017/02/25/git-submodule/">git submodule</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">LiDengHui</a></p>
         <p><span>发布时间:</span>2017-02-25, 22:42:27</p>
-        <p><span>最后更新:</span>2017-02-25, 22:44:52</p>
+        <p><span>最后更新:</span>2017-02-25, 22:45:46</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/blog/2017/02/25/git-submodule/" title="git submodule">http://lidenghui.github.io/blog/2017/02/25/git-submodule/</a>
             <span class="copy-path" data-clipboard-text="原文: http://lidenghui.github.io/blog/2017/02/25/git-submodule/　　作者: LiDengHui" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -391,7 +395,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/blog/2017/02/25/git-submodule/">git submodule</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2017/02/25/gogs-之-docker-ssh-通信（mac）/">gogs 之 docker ssh 通信（mac）</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/21/js位运算/">js位运算</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/07/visual-studio-code-terminal-command/">visual studio code terminal command</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/07/ngrok内网穿透/">ngrok内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angularjs绑定html标签/">angularjs绑定html标签</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angular-ui路由权限篇/">angularjs-ui路由权限篇</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angular服务篇/">angular服务篇</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/23/斐波那契数列的求法/">斐波那契数列的求法</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/22/ES6设计模式/">ES6设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/16/hexo/">hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/16/ejs/">EJS</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/blog/2017/02/25/git-submodule/">git submodule</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2017/02/25/gogs-之-docker-ssh-通信（mac）/">gogs 之 docker ssh 通信（mac）</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/21/js位运算/">js位运算</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/07/visual-studio-code-terminal-command/">visual studio code terminal command</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/07/ngrok内网穿透/">ngrok内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angularjs绑定html标签/">angularjs绑定html标签</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angular-ui路由权限篇/">angularjs-ui路由权限篇</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angular服务篇/">angular服务篇</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/23/斐波那契数列的求法/">斐波那契数列的求法</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/22/ES6设计模式/">ES6设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/16/ejs/">EJS</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/16/hexo/">hexo</a></li></ul>
 
 
 
