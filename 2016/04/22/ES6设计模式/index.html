@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6设计模式 | LiDengHui` Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用ES6完成各种设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6设计模式">
+<meta property="og:url" content="http://lidenghui.github.io/2016/04/22/ES6设计模式/index.html">
+<meta property="og:site_name" content="LiDengHui` Blog">
+<meta property="og:description" content="使用ES6完成各种设计模式">
+<meta property="og:updated_time" content="2017-02-25T14:15:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6设计模式">
+<meta name="twitter:description" content="使用ES6完成各种设计模式">
+  
+    <link rel="alternative" href="/atom.xml" title="LiDengHui` Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+  
+      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+      <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+  
+  <link rel="stylesheet" href="/blog/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/blog/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = /blog/;
+      </script>
+  
+
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/blog/" class="profilepic">
+            <img src="/blog/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/blog/">LiDengHui</a></h1>
+        </hgroup>
+
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/blog/">主页</a></li>
+                        
+                            <li><a href="/blog/archives/">所有文章</a></li>
+                        
+                            <li><a href="/blog/tags/">标签云</a></li>
+                        
+                            <li><a href="/blog/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:3379489032@qq.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/blog/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/blog/tags/angularjs/" style="font-size: 15px;">angularjs</a> <a href="/blog/tags/js/" style="font-size: 17.5px;">js</a> <a href="/blog/tags/前端/" style="font-size: 20px;">前端</a> <a href="/blog/tags/开发/" style="font-size: 10px;">开发</a> <a href="/blog/tags/框架/" style="font-size: 15px;">框架</a> <a href="/blog/tags/算法/" style="font-size: 12.5px;">算法</a> <a href="/blog/tags/网络/" style="font-size: 10px;">网络</a> <a href="/blog/tags/［docker-gogs］/" style="font-size: 10px;">［docker,gogs］</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">LiDengHui</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/blog/" class="profilepic">
+                <img src="/blog/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/blog/" title="回到主页">LiDengHui</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/blog/">主页</a></li>
+                
+                    <li><a href="/blog/archives/">所有文章</a></li>
+                
+                    <li><a href="/blog/tags/">标签云</a></li>
+                
+                    <li><a href="/blog/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:3379489032@qq.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/blog/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-ES6设计模式" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/blog/2016/04/22/ES6设计模式/" class="article-date">
+      <time datetime="2016-04-22T02:33:05.000Z" itemprop="datePublished">2016-04-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6设计模式
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/blog/categories/技术文档/">技术文档</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/前端/">前端</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>我认为设计模式虽然不长用,特别是在js这种函数式编程中,但是如果我们掌握了这些东西,会使我们的代码结构更优美,看起来更流畅,不一定比其他方式更好,但是会更符合个人的开发风格,我的开发风格就是<em>懒</em>.</p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>单例模式主要是在类new之后调用同一份数据,有点想其他语言的静态类，主意的是，ES6中所有的类都必须new了之后才能使用。所以单例模式就比较重要。</p>
+<pre><code>&quot;use strict&quot;;
+
+let __instance = function(){
+    let instance ;
+    return (newInstance) =&gt; {
+        if(newInstance) instance = newInstance;
+        return instance;
+    };                                                                                                   
+}();
+
+class Singleton {
+  constructor() {
+    if(__instance()) return __instance();
+    __instance(this);
+  }
+
+}
+
+class test extends Singleton {
+    constructor(){
+        super();
+        this.foo = &apos;bar&apos;;
+    }
+}
+
+
+let u1 = new test();
+let u2 = new test();
+
+console.dir(u1); //&apos;bar&apos;
+console.log(u1 === u2); //true
+</code></pre><h2 id="订阅／发布模式（事件）"><a href="#订阅／发布模式（事件）" class="headerlink" title="订阅／发布模式（事件）"></a>订阅／发布模式（事件）</h2><p>这个没什么好说的，我在自己写了之后才发现原生的node本身有自己的事件，一下是代码,采用nodejs 的继承机制我觉得会在一个的过程中特别方便，唯一觉得比较坑的就是在事件的删除上，自己写的时候想的太复杂，后来想了一下，有些时候排序能解决很多问题；就比如这句：</p>
+<pre><code>indexs.sort().reverse().forEach((item, index, array) =&gt; {
+    subs.get(type).splice(item - 1, 1);
+});
+</code></pre><p>在删除中，如果排序那么，在删除的过程中就会产生数组的长度的变化，从而影响到传入数组indexs无法匹配原有数组的情况，所以这里采用先排序后反转，从大到小，依次处理就不会影响indexs 中值得索引变化。</p>
+<h3 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h3><pre><code>const EventEmitter = require(&apos;events&apos;);
+
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+myEmitter.on(&apos;event&apos;, () =&gt; {
+  console.log(&apos;an event occurred!&apos;);
+});
+myEmitter.emit(&apos;event&apos;);
+</code></pre><h3 id="macl"><a href="#macl" class="headerlink" title="macl"></a>macl</h3><pre><code>&apos;use strict&apos;;
+class Event {
+    constructor() {
+        this.subscribers = new Map([
+            [&apos;any&apos;, []]
+        ]);
+    }
+
+    on(type = &apos;any&apos;, fn) {
+        let subs = this.subscribers;
+        if (!subs.get(type)) return subs.set(type, [fn]);
+        subs.get(type).push(fn);
+        // subs.set(type, );
+    }
+
+    emit(type = &apos;any&apos;, content) {
+        if (!this.subscribers.get(type)) return;
+        for (let fn of this.subscribers.get(type)) {
+            fn(content);
+        }
+    }
+
+    remove(type = &apos;any&apos;, ...indexs) {
+        let subs = this.subscribers;
+        if (indexs.length === 0) return subs.delete(type)
+        indexs.sort().reverse().forEach((item, index, array) =&gt; {
+            subs.get(type).splice(item - 1, 1);
+        });
+    }
+
+
+    get(type = &apos;any&apos;) {
+        let subs = this.subscribers;
+        return subs.get(type);
+    }
+}
+
+export default Event;
+
+// class Test extends Event {
+//     constructor() {
+//         super();
+//     }
+// }
+
+// let event = new Test();
+
+
+// event.on(&apos;myEvent&apos;, (content) =&gt; console.log(`1get published content: ${content}`));
+// event.on(&apos;myEvent&apos;, (content) =&gt; console.log(`2get published content: ${content}`));
+// event.on(&apos;myEvent&apos;, (content) =&gt; console.log(`3get published content: ${content}`));
+// event.on(&apos;myEvent&apos;, (content) =&gt; console.log(`4get published content: ${content}`));
+// event.on(&apos;myEvent&apos;, (content) =&gt; console.log(`5get published content: ${content}`));
+
+// event.remove(&apos;myEvent&apos;, 1, 4, 3);
+
+// event.emit(&apos;myEvent&apos;, &apos;jaja&apos;); //get published content: jaja
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>设计模式只是为了编程的更加优美，并不是说所有的都能被固化，从而在所有的地方都被用到，而要结合具体的环境而编写适合的模式，这里列出的都只是目前我能将之抽象出来的，还有很多以后会补上。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/blog/2016/04/22/ES6设计模式/">ES6设计模式</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">LiDengHui</a></p>
+        <p><span>发布时间:</span>2016-04-22, 10:33:05</p>
+        <p><span>最后更新:</span>2017-02-25, 22:15:58</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/blog/2016/04/22/ES6设计模式/" title="ES6设计模式">http://lidenghui.github.io/blog/2016/04/22/ES6设计模式/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://lidenghui.github.io/blog/2016/04/22/ES6设计模式/　　作者: LiDengHui" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/blog/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/blog/2016/04/23/斐波那契数列的求法/">
+                    斐波那契数列的求法
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/blog/2016/04/16/hexo/">
+                    hexo
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式"><span class="toc-number">1.</span> <span class="toc-text">单例模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#订阅／发布模式（事件）"><span class="toc-number">2.</span> <span class="toc-text">订阅／发布模式（事件）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nodejs"><span class="toc-number">2.1.</span> <span class="toc-text">nodejs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#macl"><span class="toc-number">2.2.</span> <span class="toc-text">macl</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <li id="bds_twi"><a href="#" class="bds_twi" data-cmd="twi" title="分享到推特"></a></li>
+            <li id="bds_tsina"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></li>
+            <li id="bds_sqq"><a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a></li>
+            <li id="bds_copy"><a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a></li>
+            <li id="bds_mail"><a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a></li>
+            <li id="bds_weixin"><a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a></li>
+            <li id="bds_more"><a href="#" class="bds_more" data-cmd="more"></i></a></li>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"ES6设计模式　| LiDengHui` Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/blog/2016/04/23/斐波那契数列的求法/" title="上一篇: 斐波那契数列的求法">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/blog/2016/04/16/hexo/" title="下一篇: hexo">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/blog/2017/02/25/gogs-之-docker-ssh-通信（mac）/">gogs 之 docker ssh 通信（mac）</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/21/js位运算/">js位运算</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/07/visual-studio-code-terminal-command/">visual studio code terminal command</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/07/ngrok内网穿透/">ngrok内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angularjs绑定html标签/">angularjs绑定html标签</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angular-ui路由权限篇/">angularjs-ui路由权限篇</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angular服务篇/">angular服务篇</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/23/斐波那契数列的求法/">斐波那契数列的求法</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/22/ES6设计模式/">ES6设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/16/hexo/">hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/16/ejs/">EJS</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 LiDengHui
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/blog/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/blog//background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="utf-8">
+  
+  <title>ngrok内网穿透 | LiDengHui` Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用ngrok从外网访问内网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ngrok内网穿透">
+<meta property="og:url" content="http://lidenghui.github.io/2016/11/07/ngrok内网穿透/index.html">
+<meta property="og:site_name" content="LiDengHui` Blog">
+<meta property="og:description" content="使用ngrok从外网访问内网">
+<meta property="og:updated_time" content="2017-02-25T14:15:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ngrok内网穿透">
+<meta name="twitter:description" content="使用ngrok从外网访问内网">
+  
+    <link rel="alternative" href="/atom.xml" title="LiDengHui` Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+  
+      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+      <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+  
+  <link rel="stylesheet" href="/blog/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/blog/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = /blog/;
+      </script>
+  
+
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/blog/" class="profilepic">
+            <img src="/blog/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/blog/">LiDengHui</a></h1>
+        </hgroup>
+
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/blog/">主页</a></li>
+                        
+                            <li><a href="/blog/archives/">所有文章</a></li>
+                        
+                            <li><a href="/blog/tags/">标签云</a></li>
+                        
+                            <li><a href="/blog/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:3379489032@qq.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/blog/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/blog/tags/angularjs/" style="font-size: 15px;">angularjs</a> <a href="/blog/tags/js/" style="font-size: 17.5px;">js</a> <a href="/blog/tags/前端/" style="font-size: 20px;">前端</a> <a href="/blog/tags/开发/" style="font-size: 10px;">开发</a> <a href="/blog/tags/框架/" style="font-size: 15px;">框架</a> <a href="/blog/tags/算法/" style="font-size: 12.5px;">算法</a> <a href="/blog/tags/网络/" style="font-size: 10px;">网络</a> <a href="/blog/tags/［docker-gogs］/" style="font-size: 10px;">［docker,gogs］</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">LiDengHui</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/blog/" class="profilepic">
+                <img src="/blog/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/blog/" title="回到主页">LiDengHui</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/blog/">主页</a></li>
+                
+                    <li><a href="/blog/archives/">所有文章</a></li>
+                
+                    <li><a href="/blog/tags/">标签云</a></li>
+                
+                    <li><a href="/blog/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:3379489032@qq.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/blog/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-ngrok内网穿透" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/blog/2016/11/07/ngrok内网穿透/" class="article-date">
+      <time datetime="2016-11-07T02:33:36.000Z" itemprop="datePublished">2016-11-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ngrok内网穿透
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/blog/categories/技术文档/">技术文档</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/网络/">网络</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="ngrok-内网穿透利器"><a href="#ngrok-内网穿透利器" class="headerlink" title="ngrok 内网穿透利器"></a>ngrok 内网穿透利器</h1><p>　　由于开发Web项目，经常需要将本地部署的网站让外网能直接访问到，最便捷的做法当然是在ADSL路由器上直接做端口映射，很不幸大部分运营商都屏蔽了80等常用端口，曾经的做法是在公网一台VPS上架设OpenVPN，将笔记本和VPS连到一个虚拟局域网，再用iptables做端口转发来达到目的，虽然可行，但速度比较慢，由于线路不稳定造成掉线几率较高。偶然发现还有个叫ngrok的神器专门做了这件事，不但提供了一个在外网能够安全的访问内网Web主机，还能捕获所有请求的http内容，方便调试，甚至还支持tcp层端口映射，不局限于某一特定的服务。支持Mac OS X，Linux，Windows平台。</p>
+<h2 id="ngrok下载运行"><a href="#ngrok下载运行" class="headerlink" title=". ngrok下载运行"></a>. ngrok下载运行</h2><p>　　体积很小，官网下载后直接解压得到一个二进制文件，在shell中执行./ngrok 80即可，默认会分配随机的二级域名来访问，转发到本机的80端口。可以通过-help参数来查看详细的说明，运行后如下提示：</p>
+<pre><code>Tunnel Status                 online
+Version                       1.6/1.5
+Forwarding                    http://steven-mbp.ngrok.com -&gt; 127.0.0.1:8080
+Forwarding                    https://steven-mbp.ngrok.com -&gt; 127.0.0.1:8080
+Web Interface                 127.0.0.1:4040
+# Conn                        16
+Avg Conn Time                 558ms
+</code></pre><p>　　我这里是使用了自定义二级域名，意味着访问<a href="http://steven-mbp.ngrok.com就如同访问内网的http://127.0.0.1:8080，很方便吧。通过ngrok提供的管理界面(127.0.0.1:4040)可以清楚的看到当前有哪些连接，以及请求的url，可以进行replay。" target="_blank" rel="external">http://steven-mbp.ngrok.com就如同访问内网的http://127.0.0.1:8080，很方便吧。通过ngrok提供的管理界面(127.0.0.1:4040)可以清楚的看到当前有哪些连接，以及请求的url，可以进行replay。</a></p>
+<h2 id="2-ngrok常用示例"><a href="#2-ngrok常用示例" class="headerlink" title="2. ngrok常用示例"></a>2. ngrok常用示例</h2><blockquote>
+<ol>
+<li>采用自定义二级域名steven-mbp.ngrok.com转发到本机的8080端口。</li>
+</ol>
+</blockquote>
+<pre><code>./ngrok -subdomain steven-mbp 8080
+</code></pre><blockquote>
+<ol>
+<li>tcp端口转发，这意味着可以在外网ssh到本机了，当然外网端口是随机分配的。</li>
+</ol>
+</blockquote>
+<pre><code>./ngrok -proto=tcp 22
+</code></pre><blockquote>
+<ol>
+<li>转发到局域网其他的机器</li>
+</ol>
+</blockquote>
+<pre><code>./ngrok 192.168.0.1:80
+</code></pre><blockquote>
+<ol>
+<li>绑定顶级域名(付费才可用)，在dashboard中添加域名，将域名cname解析到ngrok.com即可。</li>
+</ol>
+</blockquote>
+<pre><code>./ngrok -hostname test.dorole.com 8080
+</code></pre><h2 id="3-ngrok配置文件"><a href="#3-ngrok配置文件" class="headerlink" title="3. ngrok配置文件"></a>3. ngrok配置文件</h2><p>　　ngrok可以将参数写到文件中，默认是放在~/.ngrok。例如：</p>
+<pre><code>tunnels:
+client:
+    auth: &quot;user:password&quot;
+    proto:
+    https: 8080
+ssh:
+    proto: 
+    tcp: 22
+test.dorole.com
+    proto:
+    http: 9090
+</code></pre><p>　　这里定义了三个隧道，client表示转发http到本机8080，同时要求验证，ssh表示支持远程访问，第三个是绑定了域名转发到9090。这时候只需要一个./ngrok start client ssh test.dorole.com即可快速启动这三个隧道服务。</p>
+<p>　　每一个隧道的配置节点都有五个参数，proto，subdomain，auth，hostname和remote_port，每个隧道必须有proto参数来指定本地地址和端口。auth参数用于在http(s)中身份认证，而remote_port用于在tcp隧道中指定远程服务器端口。如果没有配置subdomain参数，ngrok会默认一个二级域名与隧道节点一样的名字。</p>
+<h2 id="4-配置文件中的其他参数"><a href="#4-配置文件中的其他参数" class="headerlink" title="4. 配置文件中的其他参数"></a>4. 配置文件中的其他参数</h2><pre><code>authtoken: abc123
+inspect_addr: &quot;0.0.0.0:8888&quot;
+tunnels:
+...
+</code></pre><p>　　authtoken用于设置登录ngrok的授权码，可以在ngrok首页的dashboard中查看到。inspect_addr用于设置监听ip，比如设置为0.0.0.0:8080意味着监听本机所有ip的8080端口上。ngrok也支持自己架设ngrokd服务器，在配置中通过server_addr: “dorole.com:8081″来指定自己搭建的服务器地址。设置trust_host_root_certs: true来支持TLS加密协议的证书信任。ngrok支持http proxy，可以将ngrok配置成一个http代理，这在本机网络受限制的地方用比较合适。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/blog/2016/11/07/ngrok内网穿透/">ngrok内网穿透</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">LiDengHui</a></p>
+        <p><span>发布时间:</span>2016-11-07, 10:33:36</p>
+        <p><span>最后更新:</span>2017-02-25, 22:15:58</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/blog/2016/11/07/ngrok内网穿透/" title="ngrok内网穿透">http://lidenghui.github.io/blog/2016/11/07/ngrok内网穿透/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://lidenghui.github.io/blog/2016/11/07/ngrok内网穿透/　　作者: LiDengHui" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/blog/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/blog/2016/11/07/visual-studio-code-terminal-command/">
+                    visual studio code terminal command
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/blog/2016/06/03/angularjs绑定html标签/">
+                    angularjs绑定html标签
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ngrok-内网穿透利器"><span class="toc-number">1.</span> <span class="toc-text">ngrok 内网穿透利器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ngrok下载运行"><span class="toc-number">1.1.</span> <span class="toc-text">. ngrok下载运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ngrok常用示例"><span class="toc-number">1.2.</span> <span class="toc-text">2. ngrok常用示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-ngrok配置文件"><span class="toc-number">1.3.</span> <span class="toc-text">3. ngrok配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-配置文件中的其他参数"><span class="toc-number">1.4.</span> <span class="toc-text">4. 配置文件中的其他参数</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <li id="bds_twi"><a href="#" class="bds_twi" data-cmd="twi" title="分享到推特"></a></li>
+            <li id="bds_tsina"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></li>
+            <li id="bds_sqq"><a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a></li>
+            <li id="bds_copy"><a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a></li>
+            <li id="bds_mail"><a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a></li>
+            <li id="bds_weixin"><a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a></li>
+            <li id="bds_more"><a href="#" class="bds_more" data-cmd="more"></i></a></li>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"ngrok内网穿透　| LiDengHui` Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/blog/2016/11/07/visual-studio-code-terminal-command/" title="上一篇: visual studio code terminal command">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/blog/2016/06/03/angularjs绑定html标签/" title="下一篇: angularjs绑定html标签">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/blog/2017/02/25/gogs-之-docker-ssh-通信（mac）/">gogs 之 docker ssh 通信（mac）</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/21/js位运算/">js位运算</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/07/visual-studio-code-terminal-command/">visual studio code terminal command</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/07/ngrok内网穿透/">ngrok内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angularjs绑定html标签/">angularjs绑定html标签</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angular-ui路由权限篇/">angularjs-ui路由权限篇</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angular服务篇/">angular服务篇</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/23/斐波那契数列的求法/">斐波那契数列的求法</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/22/ES6设计模式/">ES6设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/16/hexo/">hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/16/ejs/">EJS</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 LiDengHui
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/blog/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/blog//background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
