@@ -3,14 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017 | LiDengHui` Blog</title>
+  <title>git submodule | LiDengHui` Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="LiDengHui` Blog">
-<meta property="og:url" content="http://lidenghui.github.io/archives/2017/index.html">
+  <meta name="description" content="git submodule 的基本使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git submodule">
+<meta property="og:url" content="http://lidenghui.github.io/2017/02/25/git-submodule/index.html">
 <meta property="og:site_name" content="LiDengHui` Blog">
+<meta property="og:description" content="git submodule 的基本使用">
+<meta property="og:updated_time" content="2017-02-25T14:44:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LiDengHui` Blog">
+<meta name="twitter:title" content="git submodule">
+<meta name="twitter:description" content="git submodule 的基本使用">
   
     <link rel="alternative" href="/atom.xml" title="LiDengHui` Blog" type="application/atom+xml">
   
@@ -39,8 +43,8 @@
           fancybox: true,
           animate: true,
           isHome: false,
-          isPost: false,
-          isArchive: true,
+          isPost: true,
+          isArchive: false,
           isTag: false,
           isCategory: false,
           open_in_new: false,
@@ -222,81 +226,179 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-git-submodule" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/blog/2017/02/25/git-submodule/" class="archive-article-date">
-      <time datetime="2017-02-25T14:42:27.000Z" itemprop="datePublished">02-25</time>
+    <div class="article-meta">
+      <a href="/blog/2017/02/25/git-submodule/" class="article-date">
+      <time datetime="2017-02-25T14:42:27.000Z" itemprop="datePublished">2017-02-25</time>
 </a>
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2017/02/25/git-submodule/">git submodule</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git submodule
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 
-          
-        </div>
+        
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>开发过程中，经常会有一些通用的部分希望抽取出来做成一个公共库来提供给别的工程来使用，而公共代码库的版本管理是个麻烦的事情。今天无意中发现了Git的git submodule命令，之前的问题迎刃而解了。<br>添加<br>为当前工程添加submodule，命令如下：<br>    git submodule add 仓库地址 路径<br>其中，仓库地址是指子模块仓库地址，路径指将子模块放置在当前工程下的路径。<br>注意：路径不能以 / 结尾（会造成修改不生效）、不能是现有工程已有的目录（不能順利 Clone）<br>命令执行完成，会在当前工程根路径下生成一个名为“.gitmodules”的文件，其中记录了子模块的信息。添加完成以后，再将子模块所在的文件夹添加到工程中即可。<br>删除<br>submodule的删除稍微麻烦点：首先，要在“.gitmodules”文件中删除相应配置信息。然后，执行“git rm –cached ”命令将子模块所在的文件从git中删除。<br>下载的工程带有submodule<br>当使用git clone下来的工程中带有submodule时，初始的时候，submodule的内容并不会自动下载下来的，此时，只需执行如下命令：<br>    git submodule update –init –recursive<br>即可将子模块内容下载下来后工程才不会缺少相应的文件。</p>
+
+      
+    </div>
+    
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/blog/2017/02/25/gogs-之-docker-ssh-通信（mac）/" class="archive-article-date">
-      <time datetime="2017-02-25T14:18:25.000Z" itemprop="datePublished">02-25</time>
-</a>
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2017/02/25/gogs-之-docker-ssh-通信（mac）/">gogs 之 docker ssh 通信（mac）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/［docker-gogs］/">［docker,gogs］</a></li></ul>
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/blog/2017/02/25/git-submodule/">git submodule</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">LiDengHui</a></p>
+        <p><span>发布时间:</span>2017-02-25, 22:42:27</p>
+        <p><span>最后更新:</span>2017-02-25, 22:44:52</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/blog/2017/02/25/git-submodule/" title="git submodule">http://lidenghui.github.io/blog/2017/02/25/git-submodule/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://lidenghui.github.io/blog/2017/02/25/git-submodule/　　作者: LiDengHui" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/blog/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/blog/2017/02/25/gogs-之-docker-ssh-通信（mac）/">
+                    gogs 之 docker ssh 通信（mac）
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <li id="bds_twi"><a href="#" class="bds_twi" data-cmd="twi" title="分享到推特"></a></li>
+            <li id="bds_tsina"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></li>
+            <li id="bds_sqq"><a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a></li>
+            <li id="bds_copy"><a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a></li>
+            <li id="bds_mail"><a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a></li>
+            <li id="bds_weixin"><a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a></li>
+            <li id="bds_more"><a href="#" class="bds_more" data-cmd="more"></i></a></li>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"git submodule　| LiDengHui` Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/blog/2017/02/25/gogs-之-docker-ssh-通信（mac）/" title="下一篇: gogs 之 docker ssh 通信（mac）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/blog/2017/02/25/git-submodule/">git submodule</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2017/02/25/gogs-之-docker-ssh-通信（mac）/">gogs 之 docker ssh 通信（mac）</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/21/js位运算/">js位运算</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/07/visual-studio-code-terminal-command/">visual studio code terminal command</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/11/07/ngrok内网穿透/">ngrok内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angularjs绑定html标签/">angularjs绑定html标签</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angular-ui路由权限篇/">angularjs-ui路由权限篇</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/06/03/angular服务篇/">angular服务篇</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/23/斐波那契数列的求法/">斐波那契数列的求法</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/22/ES6设计模式/">ES6设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/16/hexo/">hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2016/04/16/ejs/">EJS</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
