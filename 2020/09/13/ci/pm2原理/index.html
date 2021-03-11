@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>pm2原理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="pm2PM2 是一个带有负载均衡功能的Node应用的进程管理器 主要特征 启动多子进程,充分使用CPU 子进程之间负载均衡 0秒重启 界面友好 提供进程交互(例如:监控) 接口  常用命令   命令 说明    pm2 start app.js 启动进程&#x2F;应用   pm2 start app.js –name wb123 重命名进程或应用   pm2 start bin&#x2F;www –watch 添加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pm2原理">
+<meta property="og:url" content="http://example.com/2020/09/13/ci/pm2%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="pm2PM2 是一个带有负载均衡功能的Node应用的进程管理器 主要特征 启动多子进程,充分使用CPU 子进程之间负载均衡 0秒重启 界面友好 提供进程交互(例如:监控) 接口  常用命令   命令 说明    pm2 start app.js 启动进程&#x2F;应用   pm2 start app.js –name wb123 重命名进程或应用   pm2 start bin&#x2F;www –watch 添加">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2020/09/13/ci/pm2%E5%8E%9F%E7%90%86/2020-09-28-22-21-51.png">
+<meta property="og:image" content="http://example.com/2020/09/13/ci/pm2%E5%8E%9F%E7%90%86/2020-09-28-22-22-08.png">
+<meta property="article:published_time" content="2020-09-13T04:28:20.000Z">
+<meta property="article:modified_time" content="2021-03-11T13:43:07.518Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="ci">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/09/13/ci/pm2%E5%8E%9F%E7%90%86/2020-09-28-22-21-51.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ci/pm2原理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/13/ci/pm2%E5%8E%9F%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2020-09-13T04:28:20.000Z" itemprop="datePublished">2020-09-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci/">ci</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      pm2原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="pm2"><a href="#pm2" class="headerlink" title="pm2"></a>pm2</h1><p>PM2 是一个带有负载均衡功能的Node应用的进程管理器</p>
+<h1 id="主要特征"><a href="#主要特征" class="headerlink" title="主要特征"></a>主要特征</h1><ol>
+<li>启动多子进程,充分使用CPU</li>
+<li>子进程之间负载均衡</li>
+<li>0秒重启</li>
+<li>界面友好</li>
+<li>提供进程交互(例如:监控) 接口</li>
+</ol>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pm2 start app.js</td>
+<td>启动进程/应用</td>
+</tr>
+<tr>
+<td>pm2 start app.js –name wb123</td>
+<td>重命名进程或应用</td>
+</tr>
+<tr>
+<td>pm2 start bin/www –watch</td>
+<td>添加进程应用 watch</td>
+</tr>
+<tr>
+<td>pm2 stop www</td>
+<td>结束进程/应用</td>
+</tr>
+<tr>
+<td>pm2 stop all</td>
+<td>结束所有应用</td>
+</tr>
+<tr>
+<td>pm2 delete www</td>
+<td>删除进程/应用</td>
+</tr>
+<tr>
+<td>pm2 delete all</td>
+<td>删除所有进程</td>
+</tr>
+<tr>
+<td>pm2 list</td>
+<td>列出所有进程/应用</td>
+</tr>
+<tr>
+<td>pm2 describe www</td>
+<td>查看某个进程或应用的具体情况</td>
+</tr>
+<tr>
+<td>pm2 monit</td>
+<td>查看进程或应用的资源消耗情况</td>
+</tr>
+<tr>
+<td>pm2 logs</td>
+<td>查看 pm2 日志</td>
+</tr>
+<tr>
+<td>pm2 logs wwww</td>
+<td>查看某个进程/应用的日志</td>
+</tr>
+<tr>
+<td>pm2 restart www</td>
+<td>重新启动进程/应用</td>
+</tr>
+<tr>
+<td>pm2 restart all</td>
+<td>重新启动所有进程</td>
+</tr>
+<tr>
+<td>pm2-dev start …</td>
+<td>启用开发调试</td>
+</tr>
+<tr>
+<td>pm2 starup centos</td>
+<td>设置开机自启动</td>
+</tr>
+<tr>
+<td>pm2 save</td>
+<td>保存设置</td>
+</tr>
+</tbody></table>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>使用 Cluster 模块 实现</p>
+<p>简易版 DEMO</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// master</span></span><br><span class="line"><span class="keyword">var</span> cluster = <span class="built_in">require</span>(<span class="string">&#x27;cluster&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> numCPUs = <span class="built_in">require</span>(<span class="string">&#x27;os&#x27;</span>).cpus().length;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> (cluster.isMaster) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(numCPUs);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; numCPUs; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> worker = cluster.fork();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">require</span>(<span class="string">&quot;./app.js&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// work</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    res.writeHead(<span class="number">200</span>);</span><br><span class="line">    res.end(<span class="string">&quot;hello world\n&quot;</span>);</span><br><span class="line">&#125;).listen(<span class="number">8000</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000021230376">pm2 原理</a></p>
+<h1 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h1><p> pm2: Process manager for Node apps</p>
+<p><img src="/2020/09/13/ci/pm2%E5%8E%9F%E7%90%86/2020-09-28-22-21-51.png"></p>
+<p> pm2包括Satan进程,God Deamon 守护进程、进程间的远程调用rpc,cluster等几个概念.pm2中采用God Deamon 守护进程,God进程启动后一直运行, 它相当与cluster中的Master进程,守护者worker进程的正常运行</p>
+<h1 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h1><p><img src="/2020/09/13/ci/pm2%E5%8E%9F%E7%90%86/2020-09-28-22-22-08.png"></p>
+<p>每次命令的输入都会执行一次satan程序, 如果God进程不再运行,首先需要启动God进程, 然后耕具指令, satan通过rpc调用God中对应的方法执行相应的逻辑</p>
+<h1 id="依据什么重启服务"><a href="#依据什么重启服务" class="headerlink" title="依据什么重启服务"></a>依据什么重启服务</h1><p>pm2 采用心跳检测查看子进程是否处于活跃状态</p>
+<p>每隔数秒向子进程发送心跳包,子进程如果不回复,那么调用kill杀死这个进程,然后再重新cluster.fork()一个新的进程,子进程可以监听到错误事件,这个时候可以发送消息给主进程,请求杀死自己,并且主进程此时重新调用cluster.fork()一个新的子进程</p>
+<h1 id="拥有的能力"><a href="#拥有的能力" class="headerlink" title="拥有的能力"></a>拥有的能力</h1><ol>
+<li>日志管理: 两种日志, pm2系统日志与管理的进程日志,默认会把进程的控制台输出记录到日志中</li>
+<li>负载均衡: PM2可以通过创建共享一个服务器端口的多个子进程来扩展应用程序,这样做可以还允许以零秒停机事件重启应用程序</li>
+<li>终端监控: 可以在终端中监控应用程序并检查应用程序运行状态(CPU使用率, 使用的内存, 请求/分钟等)</li>
+<li>SSH部署: 自动部署,避免逐个在所有服务器中进行ssh</li>
+<li>静态服务: 支持静态服务器功能</li>
+<li>支持开发调试模式: 非后台运行, <code>pm2-dev start &lt;appName&gt;</code></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/13/ci/pm2%E5%8E%9F%E7%90%86/" data-id="ckm4x8mlr001fkex40qoafwmm" data-title="pm2原理" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ci/" rel="tag">ci</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/13/%E5%89%8D%E7%AB%AF/Node/npm%E5%91%BD%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          npm命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/12/ci/docker/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">docker</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTPS/">HTTPS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/JS/">JS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Koa/">Koa</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Promise/">Promise</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/">async</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/await/">await</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci/">ci</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci-cd/">ci/cd</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/db/">db</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/e2e/">e2e</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/node/">node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/test/">test</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue3/">vue3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/">图片</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/">测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/">工具</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/PPT/">PPT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/iterm2/">iterm2</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/markdown/">markdown</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ssh/">ssh</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E7%AE%97%E6%B3%95/">算法</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/" rel="tag">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT/" rel="tag">PPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/" rel="tag">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/await/" rel="tag">await</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/" rel="tag">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci-cd/" rel="tag">ci/cd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db/" rel="tag">db</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/e2e/" rel="tag">e2e</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gogs/" rel="tag">gogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterm2/" rel="tag">iterm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jest/" rel="tag">jest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="tag">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80/" rel="tag">语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTTP/" style="font-size: 11.43px;">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/JS/" style="font-size: 15.71px;">JS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/Promise/" style="font-size: 11.43px;">Promise</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/angularjs/" style="font-size: 12.86px;">angularjs</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/await/" style="font-size: 10px;">await</a> <a href="/tags/ci/" style="font-size: 10px;">ci</a> <a href="/tags/ci-cd/" style="font-size: 10px;">ci/cd</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/e2e/" style="font-size: 10px;">e2e</a> <a href="/tags/error/" style="font-size: 10px;">error</a> <a href="/tags/gogs/" style="font-size: 10px;">gogs</a> <a href="/tags/iterm2/" style="font-size: 10px;">iterm2</a> <a href="/tags/javascript/" style="font-size: 14.29px;">javascript</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/js/" style="font-size: 18.57px;">js</a> <a href="/tags/mac/" style="font-size: 11.43px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.43px;">markdown</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vscode/" style="font-size: 12.86px;">vscode</a> <a href="/tags/vue/" style="font-size: 14.29px;">vue</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a> <a href="/tags/webpack/" style="font-size: 17.14px;">webpack</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">函数式编程</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%9B%BE%E7%89%87/" style="font-size: 10px;">图片</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 12.86px;">框架</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 11.43px;">测试</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 14.29px;">浏览器</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.86px;">算法</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 10px;">组件</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.43px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.43px;">计算机基础</a> <a href="/tags/%E8%AF%AD%E8%A8%80/" style="font-size: 14.29px;">语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/11/ci/ssh/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/circleci/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E7%AE%97%E6%B3%95/LRU%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81%E6%81%A2%E5%A4%8D/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>前端面试题 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="React、redux, vue、vue-router实现原理、 vuex、vue双向绑定的实现原理。redux-React状态管理 参考文档使用情况    某个组件的状态，需要共享     某个状态需要在任何地方都可以拿到     一个组件需要改变全局状态     一个组件需要改变另一个组件的状态  设计思路    Web 应用是一个状态机，视图与状态是一一对应的。     所有的状态，保存在一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试题">
+<meta property="og:url" content="http://example.com/2020/03/30/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E8%AF%95%E9%A2%98/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="React、redux, vue、vue-router实现原理、 vuex、vue双向绑定的实现原理。redux-React状态管理 参考文档使用情况    某个组件的状态，需要共享     某个状态需要在任何地方都可以拿到     一个组件需要改变全局状态     一个组件需要改变另一个组件的状态  设计思路    Web 应用是一个状态机，视图与状态是一一对应的。     所有的状态，保存在一">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-30T01:16:39.000Z">
+<meta property="article:modified_time" content="2021-03-10T15:06:34.182Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-前端/面试题/前端面试题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/30/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E8%AF%95%E9%A2%98/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2020-03-30T01:16:39.000Z" itemprop="datePublished">2020-03-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      前端面试题
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="React、redux-vue、vue-router实现原理、-vuex、vue双向绑定的实现原理。"><a href="#React、redux-vue、vue-router实现原理、-vuex、vue双向绑定的实现原理。" class="headerlink" title="React、redux, vue、vue-router实现原理、 vuex、vue双向绑定的实现原理。"></a>React、redux, vue、vue-router实现原理、 vuex、vue双向绑定的实现原理。</h1><h2 id="redux-React状态管理-参考文档"><a href="#redux-React状态管理-参考文档" class="headerlink" title="redux-React状态管理 参考文档"></a>redux-React状态管理 <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html">参考文档</a></h2><h3 id="使用情况"><a href="#使用情况" class="headerlink" title="使用情况"></a>使用情况</h3><pre><code>    某个组件的状态，需要共享
+    某个状态需要在任何地方都可以拿到
+    一个组件需要改变全局状态
+    一个组件需要改变另一个组件的状态
+</code></pre>
+<h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><pre><code>    Web 应用是一个状态机，视图与状态是一一对应的。
+    所有的状态，保存在一个对象里面。
+</code></pre>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><pre><code>    1. Store 保存数据的地方，可以看成一个容器，整个应用中只有一个store
+    2. State 对象包含的数据，如果想得到某个时点的数据，就要对store生成快照，这个时点的数据集合就叫state
+    3. Action State的变化会导致View的变化，用户接触不到State，只能接触View，State的变化必须是View导致的，Action就是View发出，用来改变State的
+    4. Reducer Store收到Action之后，必须给出一个新的State，这样View才会发生变化，这种State的计算过程就叫做Reducer
+    5. Store.dispatch（）发出Action ， store.subscribe() 监听变化
+</code></pre>
+<h2 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h2><pre><code>    “haschange”，“pushstate”，“replacestate”
+</code></pre>
+<h1 id="HTTPS-三次握手、浏览器垃圾回收机制、service-worker主要作用。"><a href="#HTTPS-三次握手、浏览器垃圾回收机制、service-worker主要作用。" class="headerlink" title="HTTPS 三次握手、浏览器垃圾回收机制、service worker主要作用。"></a>HTTPS 三次握手、浏览器垃圾回收机制、service worker主要作用。</h1><h2 id="自动垃圾回收机制-GC-Garbage-Collecation"><a href="#自动垃圾回收机制-GC-Garbage-Collecation" class="headerlink" title="自动垃圾回收机制(GC:Garbage Collecation)"></a>自动垃圾回收机制(GC:Garbage Collecation)</h2><h3 id="标记清除"><a href="#标记清除" class="headerlink" title="标记清除"></a>标记清除</h3><pre><code>    function test()&#123;
+    var a = 10 ;             //被标记 ，进入环境 
+    var b = 20 ;             //被标记 ，进入环境
+    &#125;
+    test();                     //执行完毕 之后 a、b又被标离开环境，被回收。
+</code></pre>
+<h3 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h3><pre><code>  function test()&#123;
+      var a = &#123;&#125; ;         //a的引用次数为0 
+      var b = a ;         //a的引用次数加1，为1 
+      var c =a;           //a的引用次数再加1，为2
+      var b =&#123;&#125;;          //a的引用次数减1，为1
+  &#125;
+</code></pre>
+<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><ol>
+<li><p>全局变量</p>
+</li>
+<li><p>被遗忘的定时器和回调函数</p>
+</li>
+<li><p>DOM引用</p>
+</li>
+<li><p>闭包引用</p>
+<pre><code> var theThing = null;
+ var replaceThing = function () &#123;
+   var originalThing = theThing;
+   var unused = function () &#123;
+     if (originalThing)
+       console.log(&quot;hi&quot;);
+   &#125;;
+   theThing = &#123;
+     longStr: new Array(1000000).join(&#39;*&#39;),
+     someMethod: function () &#123;
+       console.log(someMessage);
+     &#125;
+   &#125;;
+   unused =null;
+ &#125;;
+ setInterval(replaceThing, 1000);
+</code></pre>
+</li>
+</ol>
+<h2 id="Service-Worker-参考文档"><a href="#Service-Worker-参考文档" class="headerlink" title="Service Worker 参考文档"></a>Service Worker <a target="_blank" rel="noopener" href="https://linhaorong.top/blog/web/serviceworker/">参考文档</a></h2><h3 id="6种状态"><a href="#6种状态" class="headerlink" title="6种状态"></a>6种状态</h3><ol>
+<li>parsed</li>
+<li>installing</li>
+<li>installed</li>
+<li>activating</li>
+<li>activated</li>
+<li>redundant</li>
+</ol>
+<h3 id="web-Worker"><a href="#web-Worker" class="headerlink" title="web Worker"></a>web Worker</h3><p>为JavaScript 创造多线程环境，</p>
+<ol>
+<li><p>同源限制，分配给worker线程运行的脚本文件，必须与主线程脚本同源</p>
+</li>
+<li><p>DOM限制，无法使用document，window，parent，可以使用 navigator，location</p>
+</li>
+<li><p>通信联系， 不能直接通信，只能通过消息完成</p>
+</li>
+<li><p>vue模块化（懒）加载，vue和react的区别、virtual dom、diff算法等问题。</p>
+</li>
+<li><p>API数据缓存方案。</p>
+</li>
+<li><p>axios的实现原理。</p>
+</li>
+</ol>
+<h3 id="Service-Worker"><a href="#Service-Worker" class="headerlink" title="Service Worker"></a>Service Worker</h3><ol>
+<li>Service Workers本质上充当Web 应用程序与浏览器之间的代理服务器，也可以在网络可用时作为浏览器和网络间的代理，使得能够创建有效的离线体验，拦截网络请求并基于网络是否可以用以及更新资源是否驻留在服务器上采取适当的动作，允许访问和推送通知到后台同步API</li>
+</ol>
+<h3 id="使用Service-Worker的条件"><a href="#使用Service-Worker的条件" class="headerlink" title="使用Service Worker的条件"></a>使用Service Worker的条件</h3><ol>
+<li>需要在HTTPS中才可以使用serviceWorker</li>
+<li>IOS11.3 之后才支持serviceWorker</li>
+<li>如果用户在产品发版后，并且ServiceWorker未主动获取新版本的时段访问站点，用户会使用历史版本，此时需要和确保后端接口兼容历史版本</li>
+<li>要做一些异常情况的应急处理，如主动注销Service Worker</li>
+</ol>
+<h1 id="promise、await-async-thunk作用和为什么使用的相同点和不同点。"><a href="#promise、await-async-thunk作用和为什么使用的相同点和不同点。" class="headerlink" title="promise、await/async,thunk作用和为什么使用的相同点和不同点。"></a>promise、await/async,thunk作用和为什么使用的相同点和不同点。</h1><h2 id="thunk-参考文档"><a href="#thunk-参考文档" class="headerlink" title="thunk 参考文档"></a>thunk <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/05/thunk.html">参考文档</a></h2><pre><code>    1. 传值调用，传名调用
+    2. 一种传名调用的实现方式
+
+    function f(m)&#123;
+      return m * 2;     
+    &#125;
+
+    f(x + 5);
+
+    // 等同于
+
+    var thunk = function () &#123;
+      return x + 5;
+    &#125;;
+
+    function f(thunk)&#123;
+      return thunk() * 2;
+    &#125;
+</code></pre>
+<hr>
+<pre><code>    var fs = require(&#39;fs&#39;);
+    var thunkify = require(&#39;thunkify&#39;);
+    var readFile = thunkify(fs.readFile);
+
+    function run(fn) &#123;
+      var gen = fn();
+
+      function next(err, data) &#123;
+        var result = gen.next(data);
+        if (result.done) return;
+        result.value(next);
+      &#125;
+
+      next();
+    &#125;
+
+
+    var gen = function* ()&#123;
+      var f1 = yield readFile(&#39;./1.json&#39;);
+      console.dir(f1.toString())
+      var f2 = yield readFile(&#39;./2.json&#39;);
+      console.dir(f2.toString())
+    &#125;;
+
+    run(gen);
+</code></pre>
+<h2 id="使用Promise"><a href="#使用Promise" class="headerlink" title="使用Promise"></a>使用Promise</h2><pre><code>    const makeRequest = () =&gt;
+    getJSON()
+      .then(data =&gt; &#123;
+        console.log(data)
+        return &quot;done&quot;
+      &#125;)
+
+  makeRequest()
+</code></pre>
+<h2 id="使用Async"><a href="#使用Async" class="headerlink" title="使用Async"></a>使用Async</h2><pre><code>    const makeRequest = async() =&gt; &#123;
+            console.log(await getJSON)
+            return &quot;done&quot;
+    &#125;
+
+    makeRequest()
+</code></pre>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ol>
+<li><p>在函数前有一个关键字async，await关键字只能在async定义的函数中使用，如何一个async的函数都会隐式返回一个promise，并且promise reslove 的值就是return 返回的值</p>
+</li>
+<li><p>不能在函数开头使用await</p>
+</li>
+<li><p>Promise有三种状态， reslove，reject， throw， async只有二中reslove throw（reject，throw）</p>
+</li>
+<li><p>async避免依赖请求的嵌套调用</p>
+</li>
+<li><p>错误栈，出错后抛出异常，能清楚的打印到哪里出错</p>
+<h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2></li>
+<li><p>代码简介， async让代码看起来更像同步代码，不想Promise 一样需要then</p>
+</li>
+<li><p>Promise中不能自定义使用 try/catch 进行错误捕获，但是在Async/await中可以</p>
+</li>
+</ol>
+<h1 id="forEach和map的使用场景和区别。forEach中如何break"><a href="#forEach和map的使用场景和区别。forEach中如何break" class="headerlink" title="forEach和map的使用场景和区别。forEach中如何break"></a>forEach和map的使用场景和区别。forEach中如何break</h1><h2 id="forEach"><a href="#forEach" class="headerlink" title="forEach():"></a>forEach():</h2><p>针对每一个元素执行提供的函数</p>
+<h3 id="break"><a href="#break" class="headerlink" title="break"></a>break</h3><ol>
+<li>throw</li>
+<li>空跑循环</li>
+<li>改原始数组</li>
+<li>该用 every或者some</li>
+</ol>
+<h2 id="map"><a href="#map" class="headerlink" title="map():"></a>map():</h2><p>创建一个新的数组，其中每个元素由调用数组中的每个元素执行提供的函数得来</p>
+<h1 id="vscode的技术架构"><a href="#vscode的技术架构" class="headerlink" title="vscode的技术架构"></a>vscode的技术架构</h1><h2 id="多进程架构"><a href="#多进程架构" class="headerlink" title="多进程架构"></a>多进程架构</h2><p>主进程：VSCode 的入口进程，负责一些类似窗口管理、进程间通信、自动更新等全局任务<br>渲染进程：负责一个 Web 页面的渲染<br>插件宿主进程：每个插件的代码都会运行在一个独属于自己的 NodeJS 环境的宿主进程中，插件不允许访问 UI<br>Debug 进程：Debugger 相比普通插件做了特殊化<br>Search 进程：搜索是一类计算密集型的任务，单开进程保证软件整体体验与性能</p>
+<h2 id="Text-Buffer"><a href="#Text-Buffer" class="headerlink" title="Text Buffer"></a>Text Buffer</h2><h2 id="Document-Position"><a href="#Document-Position" class="headerlink" title="Document Position"></a>Document Position</h2><h1 id="jenkins-的-pipeline-as-code的语言。（Groovy）"><a href="#jenkins-的-pipeline-as-code的语言。（Groovy）" class="headerlink" title="jenkins 的 pipeline as code的语言。（Groovy）"></a>jenkins 的 pipeline as code的语言。（Groovy）</h1><h1 id="是否使用过webpack搭建项目，loader和plugin的加载顺序。"><a href="#是否使用过webpack搭建项目，loader和plugin的加载顺序。" class="headerlink" title="是否使用过webpack搭建项目，loader和plugin的加载顺序。"></a>是否使用过webpack搭建项目，loader和plugin的加载顺序。</h1><p>loader 是一个转换器，将A文件进行编译成B文件，单纯的文件转换过程，针对文件</p>
+<p>plugin 是一个扩展器，丰富了webpack本身，针对loader结束后，webpack打包的整个过程，并不是直接操作文件，而是基于事件机制工作，会监听webpack打包过程中的某些节点，执行广泛的任务，针对工程</p>
+<h1 id="项目里UT怎么保证的"><a href="#项目里UT怎么保证的" class="headerlink" title="项目里UT怎么保证的"></a>项目里UT怎么保证的</h1><h1 id="和App怎么通信的"><a href="#和App怎么通信的" class="headerlink" title="和App怎么通信的"></a>和App怎么通信的</h1><h1 id="常见安全问题"><a href="#常见安全问题" class="headerlink" title="常见安全问题"></a>常见安全问题</h1><h1 id="HTTPS咋工作的"><a href="#HTTPS咋工作的" class="headerlink" title="HTTPS咋工作的"></a>HTTPS咋工作的</h1><h1 id="React性能咋优化的"><a href="#React性能咋优化的" class="headerlink" title="React性能咋优化的"></a>React性能咋优化的</h1><h1 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h1><h1 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h1><ol>
+<li><p>减少内存消耗（列表事件绑定，事件绑定到父元素，然后用条件判断）</p>
+</li>
+<li><p>动态绑定事件</p>
+<pre><code> jquery 
+ $.on: 基本用法: $(&#39;.parent&#39;).on(&#39;click&#39;, &#39;a&#39;, function () &#123; console.log(&#39;click event on tag a&#39;); &#125;)，它是 .parent 元素之下的 a 元素的事件代理到 $(&#39;.parent&#39;) 之上，只要在这个元素上有点击事件，就会自动寻找到 .parent 元素下的 a 元素，然后响应事件；
+ $.delegate: 基本用法: $(&#39;.parent&#39;).delegate(&#39;a&#39;, &#39;click&#39;, function () &#123; console.log(&#39;click event on tag a&#39;); &#125;)，同上，并且还有相对应的 $.delegate 来删除代理的事件；
+ $.live: 基本使用方法: $(&#39;a&#39;, $(&#39;.parent&#39;)).live(&#39;click&#39;, function () &#123; console.log(&#39;click event on tag a&#39;); &#125;)，同上，然而如果没有传入父层元素 $(.parent)，那事件会默认委托到 $(document) 上；(已废除)
+</code></pre>
+</li>
+</ol>
+<ol start="21">
+<li>项目中用到了哪些设计模式</li>
+<li>Vue双向绑定原理</li>
+<li>对docker的理解</li>
+<li> Cookie咋工作的</li>
+<li> Chrome Performance用得熟不熟</li>
+<li>react vue区别 redux redux-saga场景</li>
+<li>网络安全</li>
+<li>短时间交付大的feature怎么保证质量</li>
+</ol>
+<h1 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h1><ol>
+<li>State 状态</li>
+<li>Event 事件</li>
+<li>Action 动作</li>
+<li>Transition 变换</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/30/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E8%AF%95%E9%A2%98/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="ckm3ks2wi00bpnzx4ff13dhma" data-title="前端面试题" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/01/%E5%89%8D%E7%AB%AF/React/React-Hook/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          React Hook
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/12/%E5%89%8D%E7%AB%AF/%E5%85%B6%E4%BB%96/webkit%E6%8A%80%E6%9C%AF%E6%8F%AD%E5%B9%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">webkit技术揭幕</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTPS/">HTTPS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/JS/">JS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Koa/">Koa</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Promise/">Promise</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/">async</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/await/">await</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci/">ci</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci-cd/">ci/cd</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/db/">db</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/e2e/">e2e</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/node/">node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/test/">test</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue3/">vue3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/">图片</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/">测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/">工具</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/PPT/">PPT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/iterm2/">iterm2</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/markdown/">markdown</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ssh/">ssh</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E7%AE%97%E6%B3%95/">算法</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/" rel="tag">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT/" rel="tag">PPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/" rel="tag">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/await/" rel="tag">await</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/" rel="tag">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci-cd/" rel="tag">ci/cd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db/" rel="tag">db</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/e2e/" rel="tag">e2e</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gogs/" rel="tag">gogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterm2/" rel="tag">iterm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jest/" rel="tag">jest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="tag">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80/" rel="tag">语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTTP/" style="font-size: 11.43px;">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/JS/" style="font-size: 15.71px;">JS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/Promise/" style="font-size: 11.43px;">Promise</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/angularjs/" style="font-size: 12.86px;">angularjs</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/await/" style="font-size: 10px;">await</a> <a href="/tags/ci/" style="font-size: 10px;">ci</a> <a href="/tags/ci-cd/" style="font-size: 10px;">ci/cd</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/e2e/" style="font-size: 10px;">e2e</a> <a href="/tags/error/" style="font-size: 10px;">error</a> <a href="/tags/gogs/" style="font-size: 10px;">gogs</a> <a href="/tags/iterm2/" style="font-size: 10px;">iterm2</a> <a href="/tags/javascript/" style="font-size: 14.29px;">javascript</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/js/" style="font-size: 18.57px;">js</a> <a href="/tags/mac/" style="font-size: 11.43px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.43px;">markdown</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vscode/" style="font-size: 12.86px;">vscode</a> <a href="/tags/vue/" style="font-size: 14.29px;">vue</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a> <a href="/tags/webpack/" style="font-size: 17.14px;">webpack</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">函数式编程</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%9B%BE%E7%89%87/" style="font-size: 10px;">图片</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 12.86px;">框架</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 11.43px;">测试</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 14.29px;">浏览器</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.86px;">算法</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 10px;">组件</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.43px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.43px;">计算机基础</a> <a href="/tags/%E8%AF%AD%E8%A8%80/" style="font-size: 14.29px;">语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/11/ci/ssh/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/circleci/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E7%AE%97%E6%B3%95/LRU%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81%E6%81%A2%E5%A4%8D/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

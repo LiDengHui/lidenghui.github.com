@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>React Hook | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Hook 是React 16.8的新增特性, 它可以在不编写class的情况下使用state以及其他React特性 Hooks增加了函数式组件中state的使用,在之前函数式组件是无法拥有自己的状态的,只能通过 props 以及 context 来渲染自己的UI, 而在业务逻辑中, 有些场景必须要使用到 state, 那么 我们就只能将函数式组件定义为class 组件.而现在通过 Hook, 我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Hook">
+<meta property="og:url" content="http://example.com/2020/04/01/%E5%89%8D%E7%AB%AF/React/React-Hook/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hook 是React 16.8的新增特性, 它可以在不编写class的情况下使用state以及其他React特性 Hooks增加了函数式组件中state的使用,在之前函数式组件是无法拥有自己的状态的,只能通过 props 以及 context 来渲染自己的UI, 而在业务逻辑中, 有些场景必须要使用到 state, 那么 我们就只能将函数式组件定义为class 组件.而现在通过 Hook, 我们">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-01T05:41:43.000Z">
+<meta property="article:modified_time" content="2021-03-10T15:06:32.145Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-前端/React/React-Hook" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/04/01/%E5%89%8D%E7%AB%AF/React/React-Hook/" class="article-date">
+  <time class="dt-published" datetime="2020-04-01T05:41:43.000Z" itemprop="datePublished">2020-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      React Hook
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Hook 是React 16.8的新增特性, 它可以在不编写class的情况下使用state以及其他React特性</p>
+<p>Hooks增加了函数式组件中<code>state</code>的使用,在之前函数式组件是无法拥有自己的状态的,只能通过 <strong>props</strong> 以及 <strong>context</strong> 来渲染自己的UI, 而在业务逻辑中, 有些场景必须要使用到 state, 那么 我们就只能将函数式组件定义为class 组件.而现在通过 Hook, 我们可以轻松的在函数式组件中保护我们的状态, 不需要更改为class组件</p>
+<h2 id="存在问题Class"><a href="#存在问题Class" class="headerlink" title="存在问题Class"></a>存在问题Class</h2><ol>
+<li>组件间复用状态逻辑很难</li>
+<li>复杂组件变得难以理解,高阶组件和函数组件的嵌套过深</li>
+<li>class组件存在this指向的问题</li>
+<li>难以记忆生命周期</li>
+</ol>
+<h2 id="Hooks解决的问题"><a href="#Hooks解决的问题" class="headerlink" title="Hooks解决的问题"></a>Hooks解决的问题</h2><p><strong>React Hooks</strong> 要解决的问题是状态共享, 这里的状态共享是指只共享状态逻辑复用,并不是数据之间的共享.我们知道在React Hooks之间,解决状态逻辑复用问题, 我们通常使用higher-order components 和 render-props.</p>
+<blockquote>
+<p>Hook 最大的优势其实还是对于状态逻辑的复用便捷,还有代码的简洁,以及帮助函数组件增强功能</p>
+</blockquote>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Hooks = &#123;</span><br><span class="line">    memoizedState: <span class="built_in">any</span>; <span class="comment">// 指向当前渲染节点 Fiber</span></span><br><span class="line">    baseState: <span class="built_in">any</span>; <span class="comment">// 初始化 initialState, 已经每次dispatch 之后 newState</span></span><br><span class="line">    baseUpdate: Update&lt;<span class="built_in">any</span>&gt; | <span class="literal">null</span>; <span class="comment">// 当前需要更新的Update, 每次更新完之后,会赋值上一个 update, 方便 react 在渲染错误的边缘,数据回溯</span></span><br><span class="line">    queue: UndateQueue&lt;<span class="built_in">any</span>&gt; | <span class="literal">null</span>; <span class="comment">// UndateQueue 通过</span></span><br><span class="line">    next: Hook | <span class="literal">null</span>; <span class="comment">// link 到下一个hooks, 通过next 串联每一个 hooks</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Effect = &#123;</span><br><span class="line">    tag: HookEffectTag; <span class="comment">// effectTag 标记当前hook作用在 life-cycles 的哪一个阶段</span></span><br><span class="line">    create: <span class="function">() =&gt;</span> mixed; <span class="comment">// 初始化 callback</span></span><br><span class="line">    destroy: (<span class="function">() =&gt;</span> mixed) | <span class="literal">null</span>;</span><br><span class="line">    deps: <span class="built_in">Array</span>&lt;mixed&gt; | <span class="literal">null</span>;</span><br><span class="line">    next: Effect;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Reack Hooks 全局维护了一个workInProgressHook变量, 每一次调用 Hooks API 都会首先调取 createWorkInProgressHooks函数</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWorkInProgressHook</span>(<span class="params"></span>): <span class="title">Hook</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (workInProgressHook === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="comment">// This is the first hook in the list</span></span><br><span class="line">    <span class="keyword">if</span> (firstWorkInProgressHook === <span class="literal">null</span>) &#123;</span><br><span class="line">      isReRender = <span class="literal">false</span>;</span><br><span class="line">      firstWorkInProgressHook = workInProgressHook = createHook();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// There&#x27;s already a work-in-progress. Reuse it.</span></span><br><span class="line">      isReRender = <span class="literal">true</span>;</span><br><span class="line">      workInProgressHook = firstWorkInProgressHook;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (workInProgressHook.next === <span class="literal">null</span>) &#123;</span><br><span class="line">      isReRender = <span class="literal">false</span>;</span><br><span class="line">      <span class="comment">// Append to the end of the list</span></span><br><span class="line">      workInProgressHook = workInProgressHook.next = createHook();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// There&#x27;s already a work-in-progress. Reuse it.</span></span><br><span class="line">      isReRender = <span class="literal">true</span>;</span><br><span class="line">      workInProgressHook = workInProgressHook.next;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> workInProgressHook;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Hooks 的串联不是一个数组, 是一个链式的数据结构, 从跟节点 workInProgressHook 向下通过next 进行 串联, 这也就是 为什么 Hooks不能嵌套使用,不能在判断条件中使用,不能在循环中使用,否则回破坏链式结构</p>
+<h2 id="class-与-hooks的生命周期对应关系"><a href="#class-与-hooks的生命周期对应关系" class="headerlink" title="class 与 hooks的生命周期对应关系"></a>class 与 hooks的生命周期对应关系</h2><table>
+<thead>
+<tr>
+<th>class组件</th>
+<th>Hooks组件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>constructor</td>
+<td>useState</td>
+</tr>
+<tr>
+<td>getDerivedStateFromProps</td>
+<td>useState里面的update函数</td>
+</tr>
+<tr>
+<td>shouldComponentUpdate</td>
+<td>useMemo</td>
+</tr>
+<tr>
+<td>render</td>
+<td>函数本身</td>
+</tr>
+<tr>
+<td>componentDidMount</td>
+<td>useLayoutEffect</td>
+</tr>
+<tr>
+<td>componentDidUpdate</td>
+<td>useEffect</td>
+</tr>
+<tr>
+<td>componentWillUnmount</td>
+<td>useEffect里面返回的函数</td>
+</tr>
+<tr>
+<td>componentDidCatch</td>
+<td>无</td>
+</tr>
+<tr>
+<td>getDerivedStateFromError</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<h2 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, setState] = useState(initialState);</span><br></pre></td></tr></table></figure>
+
+<p>setState 函数用于更新 state。它接收一个新的 state 值并将组件的一次重新渲染加入队列。</p>
+<pre><code>setState(Object.assign(state,&#123;name:&#39;123&#39;&#125;) // 并不会改变 state中的name
+setState(&#123;...state,&#123;name:&#39;123&#39;&#125;&#125;) // 每次都要付给他新的值
+</code></pre>
+<h2 id="useEffect-fn-state…"><a href="#useEffect-fn-state…" class="headerlink" title="useEffect(fn,[state…])"></a>useEffect(fn,[state…])</h2><p>该 Hook 接收一个包含命令式、且可能有副作用代码的函数。useEffect 的函数会在组件渲染到屏幕之后执行。</p>
+<pre><code>useEffect(() =&gt; &#123;
+  const subscription = props.source.subscribe();
+  return () =&gt; &#123;
+    // 清除订阅
+    subscription.unsubscribe();
+  &#125;;
+&#125;,[state]);
+</code></pre>
+<p>当第二个参数不填，默认为所有state，当state更新都，先执行fn返回函数，后执行fn<br>当第二个参数为[], 取消所有组件监控，当组件更新，先执行fn返回函数，后执行fn<br>当第二个参数填一个state，则当前state更新则，先执行fn返回函数，后执行fn</p>
+<h2 id="useRef"><a href="#useRef" class="headerlink" title="useRef()"></a>useRef()</h2><ol>
+<li><p>保存dom元素</p>
+<pre><code> function TextInputWithFocusButton() &#123;
+   const inputEl = useRef(null);
+   const onButtonClick = () =&gt; &#123;
+     // `current` 指向已挂载到 DOM 上的文本输入元素
+     inputEl.current.focus();
+   &#125;;
+   return (
+     &lt;&gt;
+       &lt;input ref=&#123;inputEl&#125; type=&quot;text&quot; /&gt;
+       &lt;button onClick=&#123;onButtonClick&#125;&gt;Focus the input&lt;/button&gt;
+     &lt;/&gt;
+   );
+ &#125;
+</code></pre>
+</li>
+<li><p>保存可变值 但不会渲染到页面上</p>
+<pre><code> function TextInputWithFocusButton() &#123;
+   const inputEl = useRef(null);
+   const save = useRef(&#123;name:&#39;123&#39;&#125;);
+   const onButtonClick = () =&gt; &#123;
+     // `current` 指向已挂载到 DOM 上的文本输入元素
+     save.current.value = inputEl.current.value;
+   &#125;;
+   return (
+     &lt;&gt;
+       &lt;input ref=&#123;inputEl&#125; type=&quot;text&quot; /&gt;
+       &lt;button onClick=&#123;onButtonClick&#125;&gt;Focus the input&lt;/button&gt;
+     &lt;/&gt;
+   );
+ &#125;
+</code></pre>
+</li>
+</ol>
+<h2 id="useContext-myContent"><a href="#useContext-myContent" class="headerlink" title="useContext(myContent)"></a>useContext(myContent)</h2><pre><code> 跨多层组件传值，有父组件向子组件，必须与createContext结合使用
+const value = useContext(MyContext);
+</code></pre>
+<hr>
+<pre><code>const themes = &#123;
+  light: &#123;
+    foreground: &quot;#000000&quot;,
+    background: &quot;#eeeeee&quot;
+  &#125;,
+  dark: &#123;
+    foreground: &quot;#ffffff&quot;,
+    background: &quot;#222222&quot;
+  &#125;
+&#125;;
+
+const ThemeContext = React.createContext(themes.light);
+
+function App() &#123;
+  return (
+    &lt;ThemeContext.Provider value=&#123;themes.dark&#125;&gt;
+      &lt;Toolbar /&gt;
+    &lt;/ThemeContext.Provider&gt;
+  );
+&#125;
+
+function Toolbar(props) &#123;
+  return (
+    &lt;div&gt;
+      &lt;ThemedButton /&gt;
+    &lt;/div&gt;
+  );
+&#125;
+
+function ThemedButton() &#123;
+  const theme = useContext(ThemeContext);
+  return (
+    &lt;button style=&#123;&#123; background: theme.background, color: theme.foreground &#125;&#125;&gt;
+      I am styled by theme context!
+    &lt;/button&gt;
+  );
+&#125;
+</code></pre>
+<h2 id="useMemo-gt-默认可以不写"><a href="#useMemo-gt-默认可以不写" class="headerlink" title="useMemo(()=&gt;{},[默认可以不写])"></a>useMemo(()=&gt;{},[默认可以不写])</h2><pre><code>const memoizedValue = useMemo(() =&gt; computeExpensiveValue(a, b), [a, b]);
+</code></pre>
+<p>渲染过程中执行,与useEffect不同</p>
+<ol>
+<li>不给第二个参数，一定执行，每次都渲染视图</li>
+<li>第二个参数为[], 数据怎么变都不进行视图渲染</li>
+<li>第二个参数为[a],只有当数据a变化的时候才进行视图渲染</li>
+</ol>
+<h2 id="useCallback-gt"><a href="#useCallback-gt" class="headerlink" title="useCallback(()=&gt;{}, []);"></a>useCallback(()=&gt;{}, []);</h2><pre><code>const memoizedCallback = useCallback(
+  () =&gt; &#123;
+    doSomething(a, b);
+  &#125;,
+  [a, b],
+);
+</code></pre>
+<p>和useMemo一样，但是返回的是个函数，函数每次渲染都会执行，但值不变;</p>
+<ol>
+<li>不给第二个参数，一定执行，每次值都变</li>
+<li>第二个参数为[], 值不变</li>
+<li>第二个参数为[a],只有当数据a变化的时候才进行值的变化</li>
+</ol>
+<h2 id="forwordRef-props-ref-gt"><a href="#forwordRef-props-ref-gt" class="headerlink" title="forwordRef((props, ref) =&gt; {})"></a>forwordRef((props, ref) =&gt; {})</h2><p>将组件内的domRef直接暴露到组件本身上</p>
+<pre><code>const FancyButton = React.forwardRef((props, ref) =&gt; (
+  &lt;button ref=&#123;ref&#125; className=&quot;FancyButton&quot;&gt;
+    &#123;props.children&#125;
+  &lt;/button&gt;
+));
+
+// 你可以直接获取 DOM button 的 ref：
+const ref = React.createRef();
+&lt;FancyButton ref=&#123;ref&#125;&gt;Click me!&lt;/FancyButton&gt;;
+</code></pre>
+<h2 id="useImperativeHandle-ref-gt"><a href="#useImperativeHandle-ref-gt" class="headerlink" title="useImperativeHandle(ref, ()=&gt; {}, [])"></a>useImperativeHandle(ref, ()=&gt; {}, [])</h2><p>可以在你使用ref时自定义暴露给父组件实例的值。最好与forwardRef结合使用</p>
+<pre><code>function FancyInput(props, ref) &#123;
+  const inputRef = useRef();
+  useImperativeHandle(ref, () =&gt; (&#123;
+    focus: () =&gt; &#123;
+      inputRef.current.focus();
+    &#125;
+  &#125;));
+  return &lt;input ref=&#123;inputRef&#125; ... /&gt;;
+&#125;
+FancyInput = forwardRef(FancyInput);
+</code></pre>
+<p>第三个参数，监控state的变化</p>
+<h2 id="useLayoutEffect"><a href="#useLayoutEffect" class="headerlink" title="useLayoutEffect"></a>useLayoutEffect</h2><p>其函数签名与 useEffect 相同，但它会在所有的 DOM 变更之后同步调用 effect。可以使用它来读取 DOM 布局并同步触发重渲染。在浏览器执行绘制之前，useLayoutEffect 内部的更新计划将被同步刷新。</p>
+<h2 id="自定义hook"><a href="#自定义hook" class="headerlink" title="自定义hook"></a>自定义hook</h2><ol>
+<li>必须以use开头</li>
+<li>就是一个普通函数</li>
+</ol>
+<h2 id="useReducer-reducer-初始值，initFn-return-state-dispatch"><a href="#useReducer-reducer-初始值，initFn-return-state-dispatch" class="headerlink" title="useReducer(reducer,初始值，initFn) return [state, dispatch]"></a>useReducer(reducer,初始值，initFn) return [state, dispatch]</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/04/01/%E5%89%8D%E7%AB%AF/React/React-Hook/" data-id="ckm3ks1bc0056nzx4bpczb0ep" data-title="React Hook" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/01/%E5%89%8D%E7%AB%AF/TS/typescript/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          typescript
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/30/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E8%AF%95%E9%A2%98/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">前端面试题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTPS/">HTTPS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/JS/">JS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Koa/">Koa</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Promise/">Promise</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/">async</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/await/">await</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci/">ci</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci-cd/">ci/cd</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/db/">db</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/e2e/">e2e</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/node/">node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/test/">test</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue3/">vue3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/">图片</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/">测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/">工具</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/PPT/">PPT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/iterm2/">iterm2</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/markdown/">markdown</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ssh/">ssh</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E7%AE%97%E6%B3%95/">算法</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/" rel="tag">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT/" rel="tag">PPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/" rel="tag">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/await/" rel="tag">await</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/" rel="tag">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci-cd/" rel="tag">ci/cd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db/" rel="tag">db</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/e2e/" rel="tag">e2e</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gogs/" rel="tag">gogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterm2/" rel="tag">iterm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jest/" rel="tag">jest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="tag">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80/" rel="tag">语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTTP/" style="font-size: 11.43px;">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/JS/" style="font-size: 15.71px;">JS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/Promise/" style="font-size: 11.43px;">Promise</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/angularjs/" style="font-size: 12.86px;">angularjs</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/await/" style="font-size: 10px;">await</a> <a href="/tags/ci/" style="font-size: 10px;">ci</a> <a href="/tags/ci-cd/" style="font-size: 10px;">ci/cd</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/e2e/" style="font-size: 10px;">e2e</a> <a href="/tags/error/" style="font-size: 10px;">error</a> <a href="/tags/gogs/" style="font-size: 10px;">gogs</a> <a href="/tags/iterm2/" style="font-size: 10px;">iterm2</a> <a href="/tags/javascript/" style="font-size: 14.29px;">javascript</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/js/" style="font-size: 18.57px;">js</a> <a href="/tags/mac/" style="font-size: 11.43px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.43px;">markdown</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vscode/" style="font-size: 12.86px;">vscode</a> <a href="/tags/vue/" style="font-size: 14.29px;">vue</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a> <a href="/tags/webpack/" style="font-size: 17.14px;">webpack</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">函数式编程</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%9B%BE%E7%89%87/" style="font-size: 10px;">图片</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 12.86px;">框架</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 11.43px;">测试</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 14.29px;">浏览器</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.86px;">算法</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 10px;">组件</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.43px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.43px;">计算机基础</a> <a href="/tags/%E8%AF%AD%E8%A8%80/" style="font-size: 14.29px;">语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/11/ci/ssh/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/circleci/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E7%AE%97%E6%B3%95/LRU%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81%E6%81%A2%E5%A4%8D/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

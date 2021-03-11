@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>CORS-简单请求与复杂请求 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="CORSCORS即Cross Origin Resource Sharing (跨来源资源共享), 通俗说就是我们所熟知的跨域请求,众所周知,在以前,跨域可以采用代理、JSONP等方式,而在Nodern浏览器前,一切终将是过去,应为有了CORS CORS 通过服务器端设置Access-Control-Allow-Origin 响应头,即可使指定来源像同源接口一样访问, CORS 分成两类: 1.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CORS-简单请求与复杂请求">
+<meta property="og:url" content="http://example.com/2020/08/18/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/CORS-%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%A4%8D%E6%9D%82%E8%AF%B7%E6%B1%82/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CORSCORS即Cross Origin Resource Sharing (跨来源资源共享), 通俗说就是我们所熟知的跨域请求,众所周知,在以前,跨域可以采用代理、JSONP等方式,而在Nodern浏览器前,一切终将是过去,应为有了CORS CORS 通过服务器端设置Access-Control-Allow-Origin 响应头,即可使指定来源像同源接口一样访问, CORS 分成两类: 1.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-18T14:19:19.000Z">
+<meta property="article:modified_time" content="2021-03-10T15:06:33.905Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="浏览器">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-前端/浏览器/CORS-简单请求与复杂请求" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/18/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/CORS-%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%A4%8D%E6%9D%82%E8%AF%B7%E6%B1%82/" class="article-date">
+  <time class="dt-published" datetime="2020-08-18T14:19:19.000Z" itemprop="datePublished">2020-08-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      CORS-简单请求与复杂请求
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h1><p>CORS即Cross Origin Resource Sharing (跨来源资源共享), 通俗说就是我们所熟知的跨域请求,<br>众所周知,在以前,跨域可以采用代理、JSONP等方式,而在Nodern浏览器前,一切终将是过去,应为有了CORS</p>
+<p>CORS 通过服务器端设置Access-Control-Allow-Origin 响应头,即可使指定来源像同源接口一样访问,</p>
+<p>CORS 分成两类: 1. 简单请求, 2. 复杂请求</p>
+<h1 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h1><h2 id="HTTP方法为"><a href="#HTTP方法为" class="headerlink" title="HTTP方法为"></a>HTTP方法为</h2><ul>
+<li>HEAD</li>
+<li>GET</li>
+<li>POST</li>
+</ul>
+<h2 id="请求头不能超出一下字段"><a href="#请求头不能超出一下字段" class="headerlink" title="请求头不能超出一下字段"></a>请求头不能超出一下字段</h2><ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Last-Event-ID</li>
+<li>Content-Type,但仅支持一下列  <ol>
+<li>application/x-www-form-urlencoded</li>
+<li>multipart/form-data</li>
+<li>text/plain</li>
+</ol>
+</li>
+</ul>
+<p>任何一个不满足上述要求的请求,即被认为是复杂请求.一个复杂请求不仅有包含通信内容的请求,同时也包含预请求(preflight request)</p>
+<p>简单请求的发送从代码上来看和普通的XHR没有太大的区别,但是HTTP头当中要求总是包含一个域(origin)的信息, 该域包含协议名、地址、以及一个可选的端口.不过这一项实际是由浏览器代为发送,并不是开发者代码可以触及到的</p>
+<h2 id="简单请求部分解释"><a href="#简单请求部分解释" class="headerlink" title="简单请求部分解释"></a>简单请求部分解释</h2><ul>
+<li>Access-Control-Allow-Origin(必含)—不可省略,否则请求按失败处理.该项控制数据可见范围,如果希望所有人可见,可以填写“*”</li>
+<li>Access-Control-Allow-Credentials(可选)—该项标志请求当中是否包含cookies信息,只有一个可选值true,如果不包含cookies,请略去该项.这一项与XmlHttpRequest2对象中的withCredentials属性应保持一致, 即withCredentiaks为true时,该项也为true;</li>
+<li>Access-Control-Expose-Heads(可选) — 该项确定XmlHttpRequest2对象中getResponseHeader()方法所能获取的额外信息,通常只能获取到如下信息<ol>
+<li>Cache-Control</li>
+<li>Content-Language</li>
+<li>Content-Type</li>
+<li>Expires</li>
+<li>Last-Modified</li>
+<li>Pragma</li>
+<li>当你需要访问额外信息是,就需要在这项当中填写并以逗号进行分隔</li>
+</ol>
+</li>
+</ul>
+<p>如果仅仅是简单请求,那么即便不用CORS也没有什么大不了,但是CORS的复杂请求就令CORS显的更加有用了,简单来说,任何不满足上述简单请求要求的请求,都属于复杂请求,比如PUT、DELETE、等HTTP动作, 或发送Content-Type: application/json的内容</p>
+<h1 id="复杂请求"><a href="#复杂请求" class="headerlink" title="复杂请求"></a>复杂请求</h1><p>复杂请求表面上看起来和简单请求使用差不多,但实际上浏览器发送了不止一个请求.其中最先发送的是一种“预请求”,此时作为服务器端,也需要返回“预回应”作为响应.预请求实际上是对服务器的一种权限请求,只有当预请求成功返回.实际请求才开始执行.</p>
+<p>预请求以OPTIONS形式发送,当中同样包含域,并且还包含了两项CORS特有内容</p>
+<ul>
+<li>Access-Control-Request-Method — 该项内容是实际请求的种类,可以是GET、POST之类的简单请求,也可以是PUT、DELETE等等</li>
+<li>Access-Control-Request-Headers — 该项是一个以逗号分隔的列表,当中是复杂请求所使用的头部</li>
+</ul>
+<p>显而易见,这个预请求实际上就是在为之后的实际请求发送一个权限请求,在预请求应返回的内容当中, 服务端应当对这两项进行回复, 让浏览器确定请求是否能够成功完成</p>
+<h2 id="复杂请求的部分响应头及解释"><a href="#复杂请求的部分响应头及解释" class="headerlink" title="复杂请求的部分响应头及解释"></a>复杂请求的部分响应头及解释</h2><ul>
+<li>Access-Control-Allow-Origin(必含) — 和简单请求一样,必须包含域</li>
+<li>Access-Control-Allow-Method(必含) — 这是对预请求当中Access-Control-Request-Method的回复,这一回复将是以逗号分隔的列表.尽管客户端或许只请求某一个方法,但服务器端仍然可以返回所有允许的方法,以便客户端将其缓存.</li>
+<li>Access-Control-Allow-Headers(当预请求中包含Access-Control-Request-Headers时必须包含) — 这是对预请求当中Access-Control-Requests-Headers的回复,和上面一样是以逗号分隔的列表,可以返回所有支持的头部.这里在实际使用中有遇到,所有支持的头部一时可能不能完全写出来,而不想在这一层做过多的判断,没有关系,实际上通过request的header可以直接把取到Access-Control-Request-Headers,直接把对应的value设置到Access-Control-Request-Headers即可</li>
+<li>Access-Control-Allow-Credentials(可选) — 和简单请求当中的一样</li>
+<li>Access-Control-Max-Age(可选) — 以秒为单位的缓存时间,预请求发出并非没有消耗, 允许时应当尽可能缓存</li>
+</ul>
+<p>一旦预回应如期而至,所请求的权限也就满足,则实际请求开始发送</p>
+<p>兼容版本IE11以后,所以移动端网站可以放心使用</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/18/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/CORS-%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%A4%8D%E6%9D%82%E8%AF%B7%E6%B1%82/" data-id="ckm3ks2vc00b5nzx41ryia0la" data-title="CORS-简单请求与复杂请求" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/08/19/%E5%89%8D%E7%AB%AF/JS/Promise/Promise%E8%A7%84%E8%8C%83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Promise规范
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/08/17/%E5%89%8D%E7%AB%AF/JS/%E5%88%A4%E6%96%AD%E5%92%8C%E5%A4%84%E7%90%86%E6%95%B0%E7%BB%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">判断和处理数组</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTPS/">HTTPS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/JS/">JS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Koa/">Koa</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Promise/">Promise</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/">async</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/await/">await</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci/">ci</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci-cd/">ci/cd</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/db/">db</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/e2e/">e2e</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/node/">node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/test/">test</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue3/">vue3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/">图片</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/">测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/">工具</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/PPT/">PPT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/iterm2/">iterm2</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/markdown/">markdown</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ssh/">ssh</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E7%AE%97%E6%B3%95/">算法</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/" rel="tag">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT/" rel="tag">PPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/" rel="tag">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/await/" rel="tag">await</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/" rel="tag">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci-cd/" rel="tag">ci/cd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db/" rel="tag">db</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/e2e/" rel="tag">e2e</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gogs/" rel="tag">gogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterm2/" rel="tag">iterm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jest/" rel="tag">jest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="tag">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80/" rel="tag">语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTTP/" style="font-size: 11.43px;">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/JS/" style="font-size: 15.71px;">JS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/Promise/" style="font-size: 11.43px;">Promise</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/angularjs/" style="font-size: 12.86px;">angularjs</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/await/" style="font-size: 10px;">await</a> <a href="/tags/ci/" style="font-size: 10px;">ci</a> <a href="/tags/ci-cd/" style="font-size: 10px;">ci/cd</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/e2e/" style="font-size: 10px;">e2e</a> <a href="/tags/error/" style="font-size: 10px;">error</a> <a href="/tags/gogs/" style="font-size: 10px;">gogs</a> <a href="/tags/iterm2/" style="font-size: 10px;">iterm2</a> <a href="/tags/javascript/" style="font-size: 14.29px;">javascript</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/js/" style="font-size: 18.57px;">js</a> <a href="/tags/mac/" style="font-size: 11.43px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.43px;">markdown</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vscode/" style="font-size: 12.86px;">vscode</a> <a href="/tags/vue/" style="font-size: 14.29px;">vue</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a> <a href="/tags/webpack/" style="font-size: 17.14px;">webpack</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">函数式编程</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%9B%BE%E7%89%87/" style="font-size: 10px;">图片</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 12.86px;">框架</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 11.43px;">测试</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 14.29px;">浏览器</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.86px;">算法</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 10px;">组件</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.43px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.43px;">计算机基础</a> <a href="/tags/%E8%AF%AD%E8%A8%80/" style="font-size: 14.29px;">语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/11/ci/ssh/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/circleci/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E7%AE%97%E6%B3%95/LRU%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81%E6%81%A2%E5%A4%8D/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>图片懒加载 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="实现方案 在img元素时, 自定义一个属性data-src,用于存放图片的地址 获取屏幕可是区域的尺寸 获取元素到窗口边缘的距离 判断元素是否在可视区域内.在则将data-src的值赋给src,否则不执行其他操作  实质当图片在可视区域内时,才加载,否则不加载;也可一个给个默认的图片占位 用到的api IntersectionObserver 它提供了一种异步观察目标元素与顶级文档viewport">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图片懒加载">
+<meta property="og:url" content="http://example.com/2020/09/28/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="实现方案 在img元素时, 自定义一个属性data-src,用于存放图片的地址 获取屏幕可是区域的尺寸 获取元素到窗口边缘的距离 判断元素是否在可视区域内.在则将data-src的值赋给src,否则不执行其他操作  实质当图片在可视区域内时,才加载,否则不加载;也可一个给个默认的图片占位 用到的api IntersectionObserver 它提供了一种异步观察目标元素与顶级文档viewport">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2020/09/28/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD/2020-09-28-23-44-26.png">
+<meta property="og:image" content="http://example.com/2020/09/28/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD/2020-09-28-23-55-02.png">
+<meta property="article:published_time" content="2020-09-28T14:38:20.000Z">
+<meta property="article:modified_time" content="2021-03-10T15:06:33.713Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="图片">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/09/28/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD/2020-09-28-23-44-26.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-前端/图片/图片懒加载" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/28/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD/" class="article-date">
+  <time class="dt-published" datetime="2020-09-28T14:38:20.000Z" itemprop="datePublished">2020-09-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/">图片</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      图片懒加载
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><ol>
+<li>在img元素时, 自定义一个属性data-src,用于存放图片的地址</li>
+<li>获取屏幕可是区域的尺寸</li>
+<li>获取元素到窗口边缘的距离</li>
+<li>判断元素是否在可视区域内.在则将data-src的值赋给src,否则不执行其他操作</li>
+</ol>
+<h2 id="实质"><a href="#实质" class="headerlink" title="实质"></a>实质</h2><p>当图片在可视区域内时,才加载,否则不加载;也可一个给个默认的图片占位</p>
+<h2 id="用到的api"><a href="#用到的api" class="headerlink" title="用到的api"></a>用到的api</h2><ol>
+<li><code>IntersectionObserver</code> 它提供了一种异步观察目标元素与顶级文档viewport的交集中的变化的方法</li>
+<li><code>window.requestIdleCallback()</code> 方法将浏览器的空闲时段内调用的函数排队. 这使开发者在主事件循环上执行后台和底优先级工作, 而不会影响延迟关键事件, 如动画和输入响应</li>
+</ol>
+<h2 id="几个细节"><a href="#几个细节" class="headerlink" title="几个细节"></a>几个细节</h2><ol>
+<li>提前加载,可以+100 像素</li>
+<li>滚动时只处理未加载的图片即可</li>
+<li>函数节流</li>
+</ol>
+<h2 id="简单代码示例"><a href="#简单代码示例" class="headerlink" title="简单代码示例"></a>简单代码示例</h2><p>判断是否是在可视区域的三种方法</p>
+<ol>
+<li>屏幕可视区域的高度 + 滚动条滚动距离 &gt; 元素到文档顶部的距离<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">document.documentElement.clientHeight + document.documentElement.scrollTop &gt; element.offsetTop</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line"></span><br><span class="line">2. 使用getBoundingClientRect() 获取 元素大小和位置</span><br><span class="line">3. IntersectionObserver 自动观察元素是否在可视区域内</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;html   </span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset&#x3D;&quot;UTF-8&quot; &#x2F;&gt;</span><br><span class="line">        &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot; &#x2F;&gt;</span><br><span class="line">        &lt;title&gt;图片懒加载&lt;&#x2F;title&gt;</span><br><span class="line">        &lt;style&gt;</span><br><span class="line">            img &#123;</span><br><span class="line">                display: block;</span><br><span class="line">                height: 450px;</span><br><span class="line">                margin-bottom: 20px;</span><br><span class="line">                border: 1px solid blue;</span><br><span class="line">                width: 450px;</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;&#x2F;style&gt;</span><br><span class="line">    &lt;&#x2F;head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;img data-src&#x3D;&quot;.&#x2F;images&#x2F;1.png&quot; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">        &lt;img data-src&#x3D;&quot;.&#x2F;images&#x2F;2.png&quot; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">        &lt;img data-src&#x3D;&quot;.&#x2F;images&#x2F;3.png&quot; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">        &lt;img data-src&#x3D;&quot;.&#x2F;images&#x2F;4.png&quot; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">        &lt;img data-src&#x3D;&quot;.&#x2F;images&#x2F;5.png&quot; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">        &lt;img data-src&#x3D;&quot;.&#x2F;images&#x2F;6.png&quot; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;body&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var imgs &#x3D; document.querySelectorAll(&#39;img&#39;)</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 节流函数, 定时器版本</span><br><span class="line">        function throttle(func, wait) &#123;</span><br><span class="line">            let timer &#x3D; null</span><br><span class="line"></span><br><span class="line">            return (...args) &#x3D;&gt; &#123;</span><br><span class="line">                if (!timer) &#123;</span><br><span class="line">                    func(...args)</span><br><span class="line">                    timer &#x3D; setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">                        timer &#x3D; null</span><br><span class="line">                    &#125;, wait)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; H + S &gt; offsetTop</span><br><span class="line">        function lazyLoad1(imgs) &#123;</span><br><span class="line">            &#x2F;&#x2F; offsetTop 是元素与offsetParent 的距离, 循环获取直到页面顶部</span><br><span class="line">            function getTop(e) &#123;</span><br><span class="line">                var T &#x3D; e.offsetTop</span><br><span class="line">                while ((e &#x3D; e.offsetParent)) &#123;</span><br><span class="line">                    T +&#x3D; e.offsetTop</span><br><span class="line">                &#125;</span><br><span class="line">                return T</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            var H &#x3D; document.documentElement.clientHeight &#x2F;&#x2F; 获取可视区域的高度</span><br><span class="line">            var S &#x3D;</span><br><span class="line">                document.documentElement.scrollTop || document.body.scrollTop</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;  + 100 像素 提前100个像素就开始加载</span><br><span class="line">            &#x2F;&#x2F; 并且只处理没有src即没有加载过的图片</span><br><span class="line">            Array.from(imgs).forEach((img) &#x3D;&gt; &#123;</span><br><span class="line">                if (H + S + 100 &gt; getTop(img) &amp;&amp; !img.src) &#123;</span><br><span class="line">                    img.src &#x3D; img.dataset.src</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        const throttleLazyLoad1 &#x3D; throttle(lazyLoad1, 200)</span><br><span class="line"></span><br><span class="line">        function lazyLoad2(imgs) &#123;</span><br><span class="line">            function isIn(el) &#123;</span><br><span class="line">                var bound &#x3D; el.getBoundingClientRect()</span><br><span class="line">                var clientHeight &#x3D; window.innerHeight</span><br><span class="line">                return bound.top &lt;&#x3D; clientHeight + 100</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Array.from(imgs).forEach((img) &#x3D;&gt; &#123;</span><br><span class="line">                if (isIn(img) &amp;&amp; !img.src) &#123;</span><br><span class="line">                    img.src &#x3D; img.dataset.src</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        const throttleLazyLoad2 &#x3D; throttle(lazyLoad2, 200)</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 监听滚动事件</span><br><span class="line">        window.onload &#x3D; window.onscroll &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">            &#x2F;&#x2F; throttleLazyLoad1(imgs)</span><br><span class="line">            throttleLazyLoad2(imgs)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        function lazyLoad3(imgs) &#123;</span><br><span class="line">            const io &#x3D; new IntersectionObserver((ioes) &#x3D;&gt; &#123;</span><br><span class="line">                ioes.forEach((ioe) &#x3D;&gt; &#123;</span><br><span class="line">                    const img &#x3D; ioe.target</span><br><span class="line">                    const intersectionRatio &#x3D; ioe.intersectionRatio</span><br><span class="line">                    if (intersectionRatio &gt; 0 &amp;&amp; intersectionRatio &lt;&#x3D; 1) &#123;</span><br><span class="line">                        if (!img.src) &#123;</span><br><span class="line">                            img.src &#x3D; img.dataset.src</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    img.onload &#x3D; img.onerror &#x3D; () &#x3D;&gt; io.unobserve(img)</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">            imgs.forEach((img) &#x3D;&gt; io.observe(img))</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; lazyLoad3(imgs)</span><br><span class="line">    &lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="API说明"><a href="#API说明" class="headerlink" title="API说明"></a>API说明</h1><h2 id="getBoundingClientRect"><a href="#getBoundingClientRect" class="headerlink" title="getBoundingClientRect"></a>getBoundingClientRect</h2><ol>
+<li>返回值是一个DOMRect对象, 这个对象是由该元素的getClientRects() 方法返回的一组矩形的集合, 就是该元素的css边框大小.返回的结果是包含完整元素的最小矩形,并且拥有 left,top,right,bottom,x, y, width, height 这几个以像素为单位的只读属性用于描述整个边框, 除了width和height以外的属性是相对于视图窗口的左上角来计算的</li>
+<li>如果需要获得相对于整个网页左上角定位的属性,那么只要给top、left属性加上当前的滚动位置,(通过window.scrollX和window.scrollY),这样就可以获取与当前滚动位置无关的值</li>
+</ol>
+<p><img src="/2020/09/28/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD/2020-09-28-23-44-26.png"></p>
+<h2 id="IntersectionObserver交叉观察器http-www-ruanyifeng-com-blog-2016-11-intersectionobserver-api-html"><a href="#IntersectionObserver交叉观察器http-www-ruanyifeng-com-blog-2016-11-intersectionobserver-api-html" class="headerlink" title="IntersectionObserver交叉观察器http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html"></a>IntersectionObserver交叉观察器<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html">http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html</a></h2><p><code>IntersectionObserverEntry</code> 对象提供目标元素信息</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  time: <span class="number">3893.92</span>,</span><br><span class="line">  rootBounds: ClientRect &#123;</span><br><span class="line">    bottom: <span class="number">920</span>,</span><br><span class="line">    height: <span class="number">1024</span>,</span><br><span class="line">    left: <span class="number">0</span>,</span><br><span class="line">    right: <span class="number">1024</span>,</span><br><span class="line">    top: <span class="number">0</span>,</span><br><span class="line">    width: <span class="number">920</span></span><br><span class="line">  &#125;,</span><br><span class="line">  boundingClientRect: ClientRect &#123;</span><br><span class="line">     <span class="comment">// ...</span></span><br><span class="line">  &#125;,</span><br><span class="line">  intersectionRect: ClientRect &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;,</span><br><span class="line">  intersectionRatio: <span class="number">0.54</span>,</span><br><span class="line">  target: element</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>time: 可见性发生变化的时间, 是一个高精度时间戳,单位为毫秒</li>
+<li>target: 被观察的元素,是一个DOM节点对象</li>
+<li>rootBounds: 根元素的矩形区域的信息, getBoundingClientRect()方法的返回值,如果没有根元素(即直接相对于视口滚动), 则返回null</li>
+<li>boundingClientRect: 当前目标元素的矩形区域信息</li>
+<li>intersectionRect: 目标元素与视口(或根元素)的交叉区域的信息</li>
+<li>intersectionRatio: 目标元素的可见比例, 即intersectionRect占boundingClientRect的比例,完全时可为1, 完全不可见时小于等于0</li>
+</ol>
+<p><img src="/2020/09/28/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD/2020-09-28-23-55-02.png"></p>
+<p>上图中,灰色的水平方框代表视口, 深红色的区域代表四个被观察的元素,</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/28/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD/" data-id="ckm3ks2og00a1nzx400xtg8s2" data-title="图片懒加载" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/29/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          渲染流程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/25/%E5%89%8D%E7%AB%AF/Vue/vue-diff%E7%AE%97%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vue-diff算法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTPS/">HTTPS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/JS/">JS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Koa/">Koa</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Promise/">Promise</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/">async</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/await/">await</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci/">ci</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci-cd/">ci/cd</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/db/">db</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/e2e/">e2e</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/node/">node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/test/">test</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue3/">vue3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/">图片</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/">测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/">工具</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/PPT/">PPT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/iterm2/">iterm2</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/markdown/">markdown</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ssh/">ssh</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E7%AE%97%E6%B3%95/">算法</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/" rel="tag">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT/" rel="tag">PPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/" rel="tag">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/await/" rel="tag">await</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/" rel="tag">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci-cd/" rel="tag">ci/cd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db/" rel="tag">db</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/e2e/" rel="tag">e2e</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gogs/" rel="tag">gogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterm2/" rel="tag">iterm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jest/" rel="tag">jest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="tag">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80/" rel="tag">语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTTP/" style="font-size: 11.43px;">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/JS/" style="font-size: 15.71px;">JS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/Promise/" style="font-size: 11.43px;">Promise</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/angularjs/" style="font-size: 12.86px;">angularjs</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/await/" style="font-size: 10px;">await</a> <a href="/tags/ci/" style="font-size: 10px;">ci</a> <a href="/tags/ci-cd/" style="font-size: 10px;">ci/cd</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/e2e/" style="font-size: 10px;">e2e</a> <a href="/tags/error/" style="font-size: 10px;">error</a> <a href="/tags/gogs/" style="font-size: 10px;">gogs</a> <a href="/tags/iterm2/" style="font-size: 10px;">iterm2</a> <a href="/tags/javascript/" style="font-size: 14.29px;">javascript</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/js/" style="font-size: 18.57px;">js</a> <a href="/tags/mac/" style="font-size: 11.43px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.43px;">markdown</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vscode/" style="font-size: 12.86px;">vscode</a> <a href="/tags/vue/" style="font-size: 14.29px;">vue</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a> <a href="/tags/webpack/" style="font-size: 17.14px;">webpack</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">函数式编程</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%9B%BE%E7%89%87/" style="font-size: 10px;">图片</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 12.86px;">框架</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 11.43px;">测试</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 14.29px;">浏览器</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.86px;">算法</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 10px;">组件</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.43px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.43px;">计算机基础</a> <a href="/tags/%E8%AF%AD%E8%A8%80/" style="font-size: 14.29px;">语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/11/ci/ssh/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/circleci/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E7%AE%97%E6%B3%95/LRU%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81%E6%81%A2%E5%A4%8D/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

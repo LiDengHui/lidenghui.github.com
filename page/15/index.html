@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/15/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-ci/ngrok内网穿透" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/11/07/ci/ngrok%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="article-date">
+  <time class="dt-published" datetime="2016-11-07T02:33:36.000Z" itemprop="datePublished">2016-11-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/11/07/ci/ngrok%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">ngrok内网穿透</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="ngrok-内网穿透利器"><a href="#ngrok-内网穿透利器" class="headerlink" title="ngrok 内网穿透利器"></a>ngrok 内网穿透利器</h1><p>　　由于开发Web项目，经常需要将本地部署的网站让外网能直接访问到，最便捷的做法当然是在ADSL路由器上直接做端口映射，很不幸大部分运营商都屏蔽了80等常用端口，曾经的做法是在公网一台VPS上架设OpenVPN，将笔记本和VPS连到一个虚拟局域网，再用iptables做端口转发来达到目的，虽然可行，但速度比较慢，由于线路不稳定造成掉线几率较高。偶然发现还有个叫ngrok的神器专门做了这件事，不但提供了一个在外网能够安全的访问内网Web主机，还能捕获所有请求的http内容，方便调试，甚至还支持tcp层端口映射，不局限于某一特定的服务。支持Mac OS X，Linux，Windows平台。</p>
+<h2 id="ngrok下载运行"><a href="#ngrok下载运行" class="headerlink" title=". ngrok下载运行"></a>. ngrok下载运行</h2><p>　　体积很小，官网下载后直接解压得到一个二进制文件，在shell中执行./ngrok 80即可，默认会分配随机的二级域名来访问，转发到本机的80端口。可以通过-help参数来查看详细的说明，运行后如下提示：</p>
+<pre><code>    Tunnel Status                 online
+    Version                       1.6/1.5
+    Forwarding                    http://steven-mbp.ngrok.com -&gt; 127.0.0.1:8080
+    Forwarding                    https://steven-mbp.ngrok.com -&gt; 127.0.0.1:8080
+    Web Interface                 127.0.0.1:4040
+    # Conn                        16
+    Avg Conn Time                 558ms
+</code></pre>
+<p>　　我这里是使用了自定义二级域名，意味着访问<a target="_blank" rel="noopener" href="http://steven-mbp.ngrok.com就如同访问内网的http//127.0.0.1:8080%EF%BC%8C%E5%BE%88%E6%96%B9%E4%BE%BF%E5%90%A7%E3%80%82%E9%80%9A%E8%BF%87ngrok%E6%8F%90%E4%BE%9B%E7%9A%84%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2(127.0.0.1:4040)%E5%8F%AF%E4%BB%A5%E6%B8%85%E6%A5%9A%E7%9A%84%E7%9C%8B%E5%88%B0%E5%BD%93%E5%89%8D%E6%9C%89%E5%93%AA%E4%BA%9B%E8%BF%9E%E6%8E%A5%EF%BC%8C%E4%BB%A5%E5%8F%8A%E8%AF%B7%E6%B1%82%E7%9A%84url%EF%BC%8C%E5%8F%AF%E4%BB%A5%E8%BF%9B%E8%A1%8Creplay%E3%80%82">http://steven-mbp.ngrok.com就如同访问内网的http://127.0.0.1:8080，很方便吧。通过ngrok提供的管理界面(127.0.0.1:4040)可以清楚的看到当前有哪些连接，以及请求的url，可以进行replay。</a></p>
+<h2 id="2-ngrok常用示例"><a href="#2-ngrok常用示例" class="headerlink" title="2. ngrok常用示例"></a>2. ngrok常用示例</h2><blockquote>
+<ol>
+<li>采用自定义二级域名steven-mbp.ngrok.com转发到本机的8080端口。</li>
+</ol>
+</blockquote>
+<pre><code>    ./ngrok -subdomain steven-mbp 8080
+</code></pre>
+<blockquote>
+<ol start="2">
+<li>tcp端口转发，这意味着可以在外网ssh到本机了，当然外网端口是随机分配的。</li>
+</ol>
+</blockquote>
+<pre><code>    ./ngrok -proto=tcp 22
+</code></pre>
+<blockquote>
+<ol start="3">
+<li>转发到局域网其他的机器</li>
+</ol>
+</blockquote>
+<pre><code>    ./ngrok 192.168.0.1:80
+</code></pre>
+<blockquote>
+<ol start="4">
+<li>绑定顶级域名(付费才可用)，在dashboard中添加域名，将域名cname解析到ngrok.com即可。</li>
+</ol>
+</blockquote>
+<pre><code>    ./ngrok -hostname test.dorole.com 8080
+</code></pre>
+<h2 id="3-ngrok配置文件"><a href="#3-ngrok配置文件" class="headerlink" title="3. ngrok配置文件"></a>3. ngrok配置文件</h2><p>　　ngrok可以将参数写到文件中，默认是放在~/.ngrok。例如：</p>
+<pre><code>    tunnels:
+    client:
+        auth: &quot;user:password&quot;
+        proto:
+        https: 8080
+    ssh:
+        proto: 
+        tcp: 22
+    test.dorole.com
+        proto:
+        http: 9090
+</code></pre>
+<p>　　这里定义了三个隧道，client表示转发http到本机8080，同时要求验证，ssh表示支持远程访问，第三个是绑定了域名转发到9090。这时候只需要一个./ngrok start client ssh test.dorole.com即可快速启动这三个隧道服务。</p>
+<p>　　每一个隧道的配置节点都有五个参数，proto，subdomain，auth，hostname和remote_port，每个隧道必须有proto参数来指定本地地址和端口。auth参数用于在http(s)中身份认证，而remote_port用于在tcp隧道中指定远程服务器端口。如果没有配置subdomain参数，ngrok会默认一个二级域名与隧道节点一样的名字。</p>
+<h2 id="4-配置文件中的其他参数"><a href="#4-配置文件中的其他参数" class="headerlink" title="4. 配置文件中的其他参数"></a>4. 配置文件中的其他参数</h2><pre><code>    authtoken: abc123
+    inspect_addr: &quot;0.0.0.0:8888&quot;
+    tunnels:
+    ...
+</code></pre>
+<p>　　authtoken用于设置登录ngrok的授权码，可以在ngrok首页的dashboard中查看到。inspect_addr用于设置监听ip，比如设置为0.0.0.0:8080意味着监听本机所有ip的8080端口上。ngrok也支持自己架设ngrokd服务器，在配置中通过server_addr: “dorole.com:8081″来指定自己搭建的服务器地址。设置trust_host_root_certs: true来支持TLS加密协议的证书信任。ngrok支持http proxy，可以将ngrok配置成一个http代理，这在本机网络受限制的地方用比较合适。</p>
+<h1 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h1><blockquote>
+<p>3w429299t4.zicp.vip<br><a target="_blank" rel="noopener" href="http://34ji293130.wicp.vip/github-webhook/">http://34ji293130.wicp.vip/github-webhook/</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/11/07/ci/ngrok%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" data-id="ckm4x8mls001jkex4abskg9t1" data-title="ngrok内网穿透" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/angular/angularjs绑定html标签" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/06/03/%E5%89%8D%E7%AB%AF/angular/angularjs%E7%BB%91%E5%AE%9Ahtml%E6%A0%87%E7%AD%BE/" class="article-date">
+  <time class="dt-published" datetime="2016-06-03T03:26:00.000Z" itemprop="datePublished">2016-06-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/06/03/%E5%89%8D%E7%AB%AF/angular/angularjs%E7%BB%91%E5%AE%9Ahtml%E6%A0%87%E7%AD%BE/">angularjs绑定html标签</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="方法一使用ngSanitize"><a href="#方法一使用ngSanitize" class="headerlink" title="方法一使用ngSanitize"></a>方法一使用ngSanitize</h2><p>angular.module(‘app’).filter(‘unsafe’, function($sce) { return $sce.trustAsHtml; });<br>在angular 1.2 之前是直接通过 ng-bind-html-unsafe=”contenxt”,之后angular 官方去掉了这样直接的绑定方法<br>直接通过$sce的$sce.trustAsHtml 取代,<br>但是我们也可以通过使用指令的方式达到相同的目的</p>
+<h2 id="方法二自定指令"><a href="#方法二自定指令" class="headerlink" title="方法二自定指令"></a>方法二自定指令</h2><p>不用ngSanitize</p>
+<p>module.directive(‘html’, function() {<br>    function link(scope, element, attrs) {</p>
+<pre><code>    var update = function() &#123;
+        element.html(scope.html);
+    &#125;
+
+    attrs.$observe(&#39;html&#39;, function(value) &#123;
+        update();
+    &#125;);
+&#125;
+
+return &#123;
+    link: link,
+    scope:  &#123;
+        html:   &#39;=&#39;
+    &#125;
+&#125;;
+</code></pre>
+<p>});<br>How to use:</p>
+<div html="angular.variable"></div>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/06/03/%E5%89%8D%E7%AB%AF/angular/angularjs%E7%BB%91%E5%AE%9Ahtml%E6%A0%87%E7%AD%BE/" data-id="ckm3ks27z007pnzx4cn9x2fbl" data-title="angularjs绑定html标签" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/angular/angular-ui路由权限篇" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/06/03/%E5%89%8D%E7%AB%AF/angular/angular-ui%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E7%AF%87/" class="article-date">
+  <time class="dt-published" datetime="2016-06-03T03:15:20.000Z" itemprop="datePublished">2016-06-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/06/03/%E5%89%8D%E7%AB%AF/angular/angular-ui%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E7%AF%87/">angularjs-ui路由权限篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="事件捕获"><a href="#事件捕获" class="headerlink" title="事件捕获"></a>事件捕获</h2><p>用户是否可以进入哪个页面,最好在页面加载还未渲染跳转页面时进行判断,<br>第一种解决办法:在全局简历MainController</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$rootScope.$on(&#39;$stateChangeStart&#39;,function(event, toState, toParams, fromState, fromParams)&#123;</span><br><span class="line">    if(toState.name&#x3D;&#x3D;&#39;login&#39;)return;&#x2F;&#x2F; 如果是进入登录界面则允许</span><br><span class="line">    &#x2F;&#x2F; 如果用户不存在</span><br><span class="line">    if(!$rootScope.user || !$rootScope.user.token)&#123;</span><br><span class="line">        event.preventDefault();&#x2F;&#x2F; 取消默认跳转行为</span><br><span class="line">        $state.go(&quot;login&quot;,&#123;from:fromState.name,w:&#39;notLogin&#39;&#125;);&#x2F;&#x2F;跳转到登录界面</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="路由跳转配置"><a href="#路由跳转配置" class="headerlink" title="路由跳转配置"></a>路由跳转配置</h2><p>在config中配置$stateProvider.state()中的reslove中如果接收的是一个promise对象若抛出的是deferred.reject()页面是不跳转的.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider.state(&#39;default&#39;,&#123;</span><br><span class="line">    url:&#39;&#39;,</span><br><span class="line">    resolve:&#123;</span><br><span class="line">        guarder:function($q,$http)&#123;</span><br><span class="line">            var allowed &#x3D; false;</span><br><span class="line">            var deferred &#x3D; $q.defer();</span><br><span class="line">            if(allowed)&#123;</span><br><span class="line">                deferred.resolve();</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                deferred.reject();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return deferred.promise;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    templateUrl:&#39;controllers&#x2F;home&#x2F;index.html&#39;,</span><br><span class="line">    controller:&#39;HomeIndexController as vm&#39;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Controller中-location判断"><a href="#Controller中-location判断" class="headerlink" title="Controller中$location判断"></a>Controller中$location判断</h2><p>在controller中手动判断用户登陆状态,一般将用户数据存储在rootscope中,保持html模板和controller都能调用到且相互独立,当然也能放到自己定义的service中.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h2><p>三种方式各有优缺点,需要更具具体需求,判断要用哪个.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/06/03/%E5%89%8D%E7%AB%AF/angular/angular-ui%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E7%AF%87/" data-id="ckm3ks27y007onzx41blm737k" data-title="angularjs-ui路由权限篇" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/angular/angular服务篇" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/06/03/%E5%89%8D%E7%AB%AF/angular/angular%E6%9C%8D%E5%8A%A1%E7%AF%87/" class="article-date">
+  <time class="dt-published" datetime="2016-06-03T03:10:18.000Z" itemprop="datePublished">2016-06-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/06/03/%E5%89%8D%E7%AB%AF/angular/angular%E6%9C%8D%E5%8A%A1%E7%AF%87/">angular服务篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="运用范围"><a href="#运用范围" class="headerlink" title="运用范围"></a>运用范围</h2><p>Controller: 只用来处理简单的页面逻辑, 及处理View层,为View-Model修饰层,数据在Controller里被绑定道View-Model层即$scope,最后通过$digest循环来刷新页面.<br>Service: 用来处理复杂的数据逻辑,与后台服务器通信构成Model层,与Controller互联完成页面的数据传输.</p>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><ol>
+<li>Factory</li>
+<li>Service</li>
+<li>Provider</li>
+</ol>
+<h3 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h3><p>创建一个数据结构,包括对象和函数,并将其返回,在Factory 加载时被调用,后台只保留一份.但是当返回函数时可以通过new操作符,创建独立作用域数据.</p>
+<h3 id="Service-1"><a href="#Service-1" class="headerlink" title="Service:"></a>Service:</h3><p>返回一个this 对象当然也可以不返回,默认为this.对象本身会在controller 调用时被创建一次,但仅仅只会被创建一次,属于单利模式.</p>
+<h3 id="Provider"><a href="#Provider" class="headerlink" title="Provider"></a>Provider</h3><p>在angular载入时加载ProviderProvider,是唯一一种在angular运行开始时传入.config的服务,如果要进行模块范围的配置就用provider.在被Controller调用时,只会调用this.$get函数中的返回值</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>Provider –&gt; Factory –&gt; Service</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/06/03/%E5%89%8D%E7%AB%AF/angular/angular%E6%9C%8D%E5%8A%A1%E7%AF%87/" data-id="ckm3ks2fr008nnzx4bsfsb91l" data-title="angular服务篇" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-算法/斐波那契数列的求法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/04/23/%E7%AE%97%E6%B3%95/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%9A%84%E6%B1%82%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2016-04-23T15:49:29.000Z" itemprop="datePublished">2016-04-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/04/23/%E7%AE%97%E6%B3%95/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%9A%84%E6%B1%82%E6%B3%95/">斐波那契数列的求法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>斐波那契数列如下:</p>
+<pre><code>0，1，1，2，3，5，8，13，21，34，55，...
+</code></pre>
+<p>该序列为数列的当前项为此当前项的前两项之和。即：</p>
+<pre><code>recurFib(n) = recurFib(n-1)+recurfib(n-2);
+</code></pre>
+<h2 id="递归方式"><a href="#递归方式" class="headerlink" title="递归方式"></a>递归方式</h2><p>递归方式思考比较简单由上面的公式直接得出，难点在于边界值的判断。但是这个算法本身的计算会产生一个二叉数组，数组的节点在某些值上会重复，所以可以对这个算法进行改进。以避免重复运算</p>
+<pre><code>function recurFib(n) &#123;
+    if(n&lt;2)&#123;
+        return n;
+    &#125; else &#123;
+        return recurFib(n-1) + recurFib(n-2);
+    &#125;
+
+&#125;
+
+
+console.log(recurFib(10));//55
+</code></pre>
+<h2 id="动态规划版"><a href="#动态规划版" class="headerlink" title="动态规划版"></a>动态规划版</h2><pre><code>function iterFib(n) &#123;
+    var last = 1;
+    var nextLast = 1;
+    var result = 1;
+
+    if(n==0) &#123;
+        return 0;
+    &#125;
+    
+    for(var i =2 ; i &lt; n ;i ++) &#123;
+        result = last+nextLast;
+        nextLast = last;
+        last = result;
+    &#125;
+
+    return result;
+&#125;
+</code></pre>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>就比较而言动态规划法去掉了一些重复步骤，加快了运行速度</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/04/23/%E7%AE%97%E6%B3%95/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%9A%84%E6%B1%82%E6%B3%95/" data-id="ckm4x8dte0011kex483qu3lq8" data-title="斐波那契数列的求法" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/JS/ES6设计模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/04/22/%E5%89%8D%E7%AB%AF/JS/ES6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2016-04-22T02:33:05.000Z" itemprop="datePublished">2016-04-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/04/22/%E5%89%8D%E7%AB%AF/JS/ES6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">ES6设计模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>我认为设计模式虽然不长用,特别是在js这种函数式编程中,但是如果我们掌握了这些东西,会使我们的代码结构更优美,看起来更流畅,不一定比其他方式更好,但是会更符合个人的开发风格,我的开发风格就是_懒_.</p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>单例模式主要是在类new之后调用同一份数据,有点想其他语言的静态类，主意的是，ES6中所有的类都必须new了之后才能使用。所以单例模式就比较重要。</p>
+<pre><code>    &quot;use strict&quot;;
+
+    let __instance = function()&#123;
+        let instance ;
+        return (newInstance) =&gt; &#123;
+            if(newInstance) instance = newInstance;
+            return instance;
+        &#125;;                                                                                                   
+    &#125;();
+
+    class Singleton &#123;
+      constructor() &#123;
+        if(__instance()) return __instance();
+        __instance(this);
+      &#125;
+
+    &#125;
+
+    class test extends Singleton &#123;
+        constructor()&#123;
+            super();
+            this.foo = &#39;bar&#39;;
+        &#125;
+    &#125;
+
+
+    let u1 = new test();
+    let u2 = new test();
+
+    console.dir(u1); //&#39;bar&#39;
+    console.log(u1 === u2); //true
+</code></pre>
+<h2 id="订阅／发布模式（事件）"><a href="#订阅／发布模式（事件）" class="headerlink" title="订阅／发布模式（事件）"></a>订阅／发布模式（事件）</h2><p>这个没什么好说的，我在自己写了之后才发现原生的node本身有自己的事件，一下是代码,采用nodejs 的继承机制我觉得会在一个的过程中特别方便，唯一觉得比较坑的就是在事件的删除上，自己写的时候想的太复杂，后来想了一下，有些时候排序能解决很多问题；就比如这句：</p>
+<pre><code>    indexs.sort().reverse().forEach((item, index, array) =&gt; &#123;
+        subs.get(type).splice(item - 1, 1);
+    &#125;);
+</code></pre>
+<p>在删除中，如果排序那么，在删除的过程中就会产生数组的长度的变化，从而影响到传入数组indexs无法匹配原有数组的情况，所以这里采用先排序后反转，从大到小，依次处理就不会影响indexs 中值得索引变化。</p>
+<h3 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h3><pre><code>    const EventEmitter = require(&#39;events&#39;);
+
+    class MyEmitter extends EventEmitter &#123;&#125;
+
+    const myEmitter = new MyEmitter();
+    myEmitter.on(&#39;event&#39;, () =&gt; &#123;
+      console.log(&#39;an event occurred!&#39;);
+    &#125;);
+    myEmitter.emit(&#39;event&#39;);
+</code></pre>
+<h3 id="macl"><a href="#macl" class="headerlink" title="macl"></a>macl</h3><pre><code>    &#39;use strict&#39;;
+    class Event &#123;
+        constructor() &#123;
+            this.subscribers = new Map([
+                [&#39;any&#39;, []]
+            ]);
+        &#125;
+
+        on(type = &#39;any&#39;, fn) &#123;
+            let subs = this.subscribers;
+            if (!subs.get(type)) return subs.set(type, [fn]);
+            subs.get(type).push(fn);
+            // subs.set(type, );
+        &#125;
+
+        emit(type = &#39;any&#39;, content) &#123;
+            if (!this.subscribers.get(type)) return;
+            for (let fn of this.subscribers.get(type)) &#123;
+                fn(content);
+            &#125;
+        &#125;
+
+        remove(type = &#39;any&#39;, ...indexs) &#123;
+            let subs = this.subscribers;
+            if (indexs.length === 0) return subs.delete(type)
+            indexs.sort().reverse().forEach((item, index, array) =&gt; &#123;
+                subs.get(type).splice(item - 1, 1);
+            &#125;);
+        &#125;
+
+
+        get(type = &#39;any&#39;) &#123;
+            let subs = this.subscribers;
+            return subs.get(type);
+        &#125;
+    &#125;
+
+    export default Event;
+
+    // class Test extends Event &#123;
+    //     constructor() &#123;
+    //         super();
+    //     &#125;
+    // &#125;
+
+    // let event = new Test();
+
+
+    // event.on(&#39;myEvent&#39;, (content) =&gt; console.log(`1get published content: $&#123;content&#125;`));
+    // event.on(&#39;myEvent&#39;, (content) =&gt; console.log(`2get published content: $&#123;content&#125;`));
+    // event.on(&#39;myEvent&#39;, (content) =&gt; console.log(`3get published content: $&#123;content&#125;`));
+    // event.on(&#39;myEvent&#39;, (content) =&gt; console.log(`4get published content: $&#123;content&#125;`));
+    // event.on(&#39;myEvent&#39;, (content) =&gt; console.log(`5get published content: $&#123;content&#125;`));
+
+    // event.remove(&#39;myEvent&#39;, 1, 4, 3);
+
+    // event.emit(&#39;myEvent&#39;, &#39;jaja&#39;); //get published content: jaja
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>设计模式只是为了编程的更加优美，并不是说所有的都能被固化，从而在所有的地方都被用到，而要结合具体的环境而编写适合的模式，这里列出的都只是目前我能将之抽象出来的，还有很多以后会补上。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/04/22/%E5%89%8D%E7%AB%AF/JS/ES6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="ckm3ks11n001ynzx4fcr9ftxw" data-title="ES6设计模式" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/html/ejs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/04/16/%E5%89%8D%E7%AB%AF/html/ejs/" class="article-date">
+  <time class="dt-published" datetime="2016-04-16T11:39:52.000Z" itemprop="datePublished">2016-04-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/04/16/%E5%89%8D%E7%AB%AF/html/ejs/">EJS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>之前一直没有用过EJS，一直用的jade，但是越用jade，越觉得好像被框在了圈圈里，倒不是jade的语法问题，相反我觉得jade从语法角度而言是最好的一门模版语言，对比ejs没有额外的添加代码，甚至是比html更好，但是jade由于他的简洁也造成了一个问题，如果没有html2jade 的转义很难和html相结合，特别是大多数人使用的前端模版，都是建立在html上的，所以如果不是项目开始就用jade的话就特别别扭，但是EJS却没有这类的问题，当然也付出了相应的代价在代码中看到让人眼睛发晕的<code>&lt;%  %&gt;</code>标签，特别让人不舒服，这也是在刚开始学习使用模版的时候没有选择EJS的原因</p>
+<h2 id="example"><a href="#example" class="headerlink" title="example"></a>example</h2><h3 id="jade"><a href="#jade" class="headerlink" title="jade"></a>jade</h3><pre><code>    !!!
+    html
+        head
+            title #&#123;title&#125;
+            meta(charset=&quot;UTF-8&quot;)
+        body
+            div.description #&#123;description&#125;
+            ul
+                - each data in datas
+                    li.item(id=&#39;item_&#39;+data.index)
+                        span= data.time
+                        a.art(href=data.url)= data.title
+</code></pre>
+<h3 id="ejs"><a href="#ejs" class="headerlink" title="ejs"></a>ejs</h3><pre><code>    &lt;!doctype html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;title&gt;&lt;%=title%&gt; - Page Test&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class=&quot;description&quot;&gt;&lt;%=description%&gt;&lt;/div&gt;
+        &lt;ul&gt;
+    &lt;% function data(data) &#123; %&gt;
+            &lt;li class=&quot;item&quot; id=&quot;item_&lt;%=data.index%&gt;&quot;&gt;&lt;span&gt;&lt;%=data.time%&gt;&lt;/span&gt;&lt;a href=&quot;&lt;%=data.url%&gt;&quot; class=&quot;art&quot;&gt;&lt;%=data.title%&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;% &#125; %&gt;
+    &lt;% datas.map(data) %&gt;
+        &lt;/ul&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+</code></pre>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><ol>
+<li><p><code>&lt;% ... %&gt;</code> 用来包含要执行的JS代码，凡是不需要输出文本的地方都用它</p>
+</li>
+<li><p><code>&lt;%= ... %&gt;</code> 用于输出文本，被包含的值解析后转换成文本</p>
+</li>
+<li><p><code>&lt;%- ... %&gt;</code> EJS内部语法，不进行转义，如内部模版嵌套</p>
+</li>
+<li><p><code>&lt;%% ... %&gt;</code> 输出&lt;%</p>
+</li>
+<li><p><code>&lt;%#</code> 内部注释</p>
+</li>
+<li><p><code>－%&gt;</code> 换行符<br>如果不喜欢<code>&lt;% ...%&gt;</code> 也可以换成其他的</p>
+<pre><code> var ejs = require(&#39;ejs&#39;);
+ ejs.open = &#39;&#123;&#123;';
+        ejs.close = '&#125;&#125;&#39;;
+</code></pre>
+</li>
+</ol>
+<h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><ol>
+<li><p>EJS 直接使用js内嵌，用编程的方式写html,如：</p>
+<pre><code> &lt;% if (user) &#123; %&gt;
+     &lt;h2&gt;&lt;%= user.name %&gt;&lt;/h2&gt;
+ &lt;% &#125; %&gt;
+</code></pre>
+</li>
+<li><p>其主要有两种用法，一个是直接返回一个Function函数，参数为填充的数值对象，另一种是直接返回String类型的html，如：</p>
+<pre><code> var template = ejs.compile(str, options);
+ template(data);
+ // =&gt; Rendered HTML string
+
+ ejs.render(str, data, options);
+ // =&gt; Rendered HTML string
+</code></pre>
+</li>
+<li><p>其中options的一些参数为： </p>
+<ol>
+<li>cache：是否缓存解析后的模版，需要filename作为key； </li>
+<li>filename：模版文件名； </li>
+<li>scope：complile后的Function执行所在的上下文环境； </li>
+<li>debug：标识是否是debeg状态，debug为true则会输出生成的Function内容； </li>
+<li>compileDebug：标识是否是编译debug，为true则会生成解析过程中的跟踪信息，用于调试； </li>
+<li>client，标识是否用于浏览器客户端运行，为true则返回解析后的可以单独运行的Function函数； </li>
+<li>open，代码开头标记，默认为’&lt;%’； </li>
+<li>close，代码结束标记，默认为’%&gt;’； </li>
+<li>其他的一些用于解析模版时提供的变量。<br>在express中使用时，options参数将由response.render进行传入，其中包含了一些express中的设置，以及用户提供的变量值。 </li>
+</ol>
+</li>
+<li><p>此外ejs还提供了一些辅助函数，用于代替使用javascript代码，使得更加方便的操纵数据。 </p>
+<ol>
+<li>first，返回数组的第一个元素； </li>
+<li>last，返回数组的最后一个元素； </li>
+<li>capitalize，返回首字母大写的字符串； </li>
+<li>downcase，返回字符串的小写； </li>
+<li>upcase，返回字符串的大写； </li>
+<li>sort，排序（Object.create(obj).sort()？）； </li>
+<li>sort_by:’prop’，按照指定的prop属性进行升序排序； </li>
+<li>size，返回长度，即length属性，不一定非是数组才行； </li>
+<li>plus:n，加上n，将转化为Number进行运算； </li>
+<li>minus:n，减去n，将转化为Number进行运算； </li>
+<li>times:n，乘以n，将转化为Number进行运算； </li>
+<li>divided_by:n，除以n，将转化为Number进行运算； </li>
+<li>join:’val’，将数组用’val’最为分隔符，进行合并成一个字符串； </li>
+<li>truncate:n，截取前n个字符，超过长度时，将返回一个副本 </li>
+<li>truncate_words:n，取得字符串中的前n个word，word以空格进行分割； </li>
+<li>replace:pattern,substitution，字符串替换，substitution不提供将删除匹配的子串； </li>
+<li>prepend:val，如果操作数为数组，则进行合并；为字符串则添加val在前面； </li>
+<li>append:val，如果操作数为数组，则进行合并；为字符串则添加val在后面； </li>
+<li>map:’prop’，返回对象数组中属性为prop的值组成的数组； </li>
+<li>reverse，翻转数组或字符串； </li>
+<li>get:’prop’，取得属性为’prop’的值； </li>
+<li>json，转化为json格式字符串 </li>
+</ol>
+</li>
+<li><p>EJS 模版嵌套<code>&lt;%- include ... %&gt;</code></p>
+<pre><code> &lt;ul&gt;
+   &lt;% users.forEach(function(user)&#123; %&gt;
+     &lt;% include user/show %&gt;
+   &lt;% &#125;) %&gt;
+ &lt;/ul&gt;
+</code></pre>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h2><p>EJS和jade之间其实没必要太过关注，他们都是模版语言，只要你喜欢只要合适，更具具体的项目选择合适的模版就行。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/04/16/%E5%89%8D%E7%AB%AF/html/ejs/" data-id="ckm3ks2aa0086nzx4b3ji8cdm" data-title="EJS" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/14/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTPS/">HTTPS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/JS/">JS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Koa/">Koa</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Promise/">Promise</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/">async</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/await/">await</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci/">ci</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci-cd/">ci/cd</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/db/">db</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/e2e/">e2e</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/node/">node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/test/">test</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue3/">vue3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/">图片</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/">测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/">工具</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/PPT/">PPT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/iterm2/">iterm2</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/markdown/">markdown</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ssh/">ssh</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E7%AE%97%E6%B3%95/">算法</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/" rel="tag">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT/" rel="tag">PPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/" rel="tag">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/await/" rel="tag">await</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/" rel="tag">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci-cd/" rel="tag">ci/cd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db/" rel="tag">db</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/e2e/" rel="tag">e2e</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gogs/" rel="tag">gogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterm2/" rel="tag">iterm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jest/" rel="tag">jest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="tag">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80/" rel="tag">语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTTP/" style="font-size: 11.43px;">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/JS/" style="font-size: 15.71px;">JS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/Promise/" style="font-size: 11.43px;">Promise</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/angularjs/" style="font-size: 12.86px;">angularjs</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/await/" style="font-size: 10px;">await</a> <a href="/tags/ci/" style="font-size: 10px;">ci</a> <a href="/tags/ci-cd/" style="font-size: 10px;">ci/cd</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/e2e/" style="font-size: 10px;">e2e</a> <a href="/tags/error/" style="font-size: 10px;">error</a> <a href="/tags/gogs/" style="font-size: 10px;">gogs</a> <a href="/tags/iterm2/" style="font-size: 10px;">iterm2</a> <a href="/tags/javascript/" style="font-size: 14.29px;">javascript</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/js/" style="font-size: 18.57px;">js</a> <a href="/tags/mac/" style="font-size: 11.43px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.43px;">markdown</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vscode/" style="font-size: 12.86px;">vscode</a> <a href="/tags/vue/" style="font-size: 14.29px;">vue</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a> <a href="/tags/webpack/" style="font-size: 17.14px;">webpack</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">函数式编程</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%9B%BE%E7%89%87/" style="font-size: 10px;">图片</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 12.86px;">框架</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 11.43px;">测试</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 14.29px;">浏览器</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.86px;">算法</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 10px;">组件</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.43px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.43px;">计算机基础</a> <a href="/tags/%E8%AF%AD%E8%A8%80/" style="font-size: 14.29px;">语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/11/ci/ssh/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/circleci/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E7%AE%97%E6%B3%95/LRU%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81%E6%81%A2%E5%A4%8D/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

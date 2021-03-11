@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/9/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-前端/JS/判断和处理数组" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/17/%E5%89%8D%E7%AB%AF/JS/%E5%88%A4%E6%96%AD%E5%92%8C%E5%A4%84%E7%90%86%E6%95%B0%E7%BB%84/" class="article-date">
+  <time class="dt-published" datetime="2020-08-17T15:55:30.000Z" itemprop="datePublished">2020-08-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/js/">js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/08/17/%E5%89%8D%E7%AB%AF/JS/%E5%88%A4%E6%96%AD%E5%92%8C%E5%A4%84%E7%90%86%E6%95%B0%E7%BB%84/">判断和处理数组</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="判断数组"><a href="#判断数组" class="headerlink" title="判断数组"></a>判断数组</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.</span></span><br><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Array</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 数组重写了toString()方法需要借用</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call([]) === <span class="string">&#x27;[object Array]&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. </span></span><br><span class="line"><span class="built_in">Array</span>.prototype.isPrototypeOf([]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4.</span></span><br><span class="line">[].constructor === <span class="built_in">Array</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5.</span></span><br><span class="line"><span class="built_in">Array</span>.isArray([]);</span><br></pre></td></tr></table></figure>
+
+<h1 id="如何处理类数组对象"><a href="#如何处理类数组对象" class="headerlink" title="如何处理类数组对象"></a>如何处理类数组对象</h1><h2 id="JavaScript类数组对象的定义"><a href="#JavaScript类数组对象的定义" class="headerlink" title="JavaScript类数组对象的定义"></a>JavaScript类数组对象的定义</h2><p>可以同过索引访问元素, 并且拥有length属性</p>
+<p>没有数组的方法,例如 push, forEach, indexOf等</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="string">&#x27;js&#x27;</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="string">&#x27;Node&#x27;</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="string">&#x27;TS&#x27;</span>,</span><br><span class="line">  length: <span class="number">3</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="转换方式"><a href="#转换方式" class="headerlink" title="转换方式"></a>转换方式</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line"><span class="built_in">Array</span>.prototype.slice.apply(<span class="built_in">arguments</span>);</span><br><span class="line">[].slice.call(<span class="built_in">arguments</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 需要arguemnts必须有遍历接口</span></span><br><span class="line">[...arguments]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.</span></span><br><span class="line"><span class="built_in">Array</span>.from(arguemnts);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4.</span></span><br><span class="line">[].concat.apply([], <span class="built_in">arguments</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toArray</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> arr = [];</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i =<span class="number">0</span>, len =s.length; i&lt; len; i++&gt;) &#123;</span><br><span class="line">    arr[i] = s[i]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
+<li>数组的长度由类数组的length决定</li>
+<li>索引不连续,会自动补位undefined</li>
+<li>仅仅考虑0和正整数索引</li>
+<li>slice会产生系数数组,内容是empty而不是undefined</li>
+<li>类数组push注意,push操作是length所在的位置</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/17/%E5%89%8D%E7%AB%AF/JS/%E5%88%A4%E6%96%AD%E5%92%8C%E5%A4%84%E7%90%86%E6%95%B0%E7%BB%84/" data-id="ckm3ks1a50044nzx4e4657evt" data-title="判断和处理数组" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-后端/PHP/YII/YII架构设计" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/17/%E5%90%8E%E7%AB%AF/PHP/YII/YII%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" class="article-date">
+  <time class="dt-published" datetime="2020-08-17T15:44:56.000Z" itemprop="datePublished">2020-08-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/webpack/">webpack</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/08/17/%E5%90%8E%E7%AB%AF/PHP/YII/YII%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">YII架构设计</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/17/%E5%90%8E%E7%AB%AF/PHP/YII/YII%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" data-id="ckm4x7xso0009kex44z12hh8n" data-title="YII架构设计" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-数据库/MySQL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/16/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" class="article-date">
+  <time class="dt-published" datetime="2020-08-16T14:09:15.000Z" itemprop="datePublished">2020-08-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/db/">db</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/08/16/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/">MySQL</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="启动mysql"><a href="#启动mysql" class="headerlink" title="启动mysql"></a>启动mysql</h3><ol>
+<li>sudo /usr/local/mysql/support-files/mysql.server start**</li>
+</ol>
+<h3 id="停止mysql"><a href="#停止mysql" class="headerlink" title="停止mysql"></a>停止mysql</h3><ol>
+<li>sudo /usr/local/mysql/support-files/mysql.server stop**</li>
+</ol>
+<h3 id="重启mysql"><a href="#重启mysql" class="headerlink" title="重启mysql"></a>重启mysql</h3><ol>
+<li>sudo /usr/local/mysql/support-files/mysql.server restart**</li>
+</ol>
+<h2 id="服务管理命令"><a href="#服务管理命令" class="headerlink" title="服务管理命令"></a>服务管理命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">brew services start mysql</span><br><span class="line">brew services run mysql</span><br><span class="line">brew services stop mysql</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/eee8a7de179c">mysql启动关闭服务</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/16/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" data-id="ckm4x87t3000kkex40n8zggzv" data-title="MySQL" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/db/" rel="tag">db</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/测试/UI测试之backstopjs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/14/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/UI%E6%B5%8B%E8%AF%95%E4%B9%8Bbackstopjs/" class="article-date">
+  <time class="dt-published" datetime="2020-08-14T15:14:15.000Z" itemprop="datePublished">2020-08-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/">测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/08/14/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/UI%E6%B5%8B%E8%AF%95%E4%B9%8Bbackstopjs/">UI测试之backstopjs</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="UI测试之backstopjs"><a href="#UI测试之backstopjs" class="headerlink" title="UI测试之backstopjs"></a>UI测试之backstopjs</h1><p>用来比较实际做出来的项目与UX的设计图的差异,像素级比较</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install backstopjs</span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backstop init</span><br></pre></td></tr></table></figure>
+<p>会在根目录下生成一个<code>backstop.json</code>文件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;id&quot;</span>: <span class="string">&quot;qqmap&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;viewports&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;phone&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;width&quot;</span>: <span class="number">320</span>,</span><br><span class="line">            <span class="attr">&quot;height&quot;</span>: <span class="number">480</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;tablet&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;width&quot;</span>: <span class="number">1024</span>,</span><br><span class="line">            <span class="attr">&quot;height&quot;</span>: <span class="number">768</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">&quot;onBeforeScript&quot;</span>: <span class="string">&quot;puppet/onBefore.js&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;onReadyScript&quot;</span>: <span class="string">&quot;puppet/onReady.js&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;scenarios&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;mapindex&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;cookiePath&quot;</span>: <span class="string">&quot;backstop_data/engine_scripts/cookies.json&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;https://map.qq.com/m/&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;referenceUrl&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;readyEvent&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;readySelector&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;delay&quot;</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">&quot;hideSelectors&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;removeSelectors&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;hoverSelector&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;clickSelector&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;postInteractionWait&quot;</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">&quot;selectors&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;selectorExpansion&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">&quot;expect&quot;</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">&quot;misMatchThreshold&quot;</span>: <span class="number">0.1</span>,</span><br><span class="line">            <span class="attr">&quot;requireSameDimensions&quot;</span>: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">&quot;paths&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;bitmaps_reference&quot;</span>: <span class="string">&quot;backstop_data/bitmaps_reference&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;bitmaps_test&quot;</span>: <span class="string">&quot;backstop_data/bitmaps_test&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;engine_scripts&quot;</span>: <span class="string">&quot;backstop_data/engine_scripts&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;html_report&quot;</span>: <span class="string">&quot;backstop_data/html_report&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;ci_report&quot;</span>: <span class="string">&quot;backstop_data/ci_report&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;report&quot;</span>: [<span class="string">&quot;browser&quot;</span>],</span><br><span class="line">    <span class="attr">&quot;engine&quot;</span>: <span class="string">&quot;puppeteer&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;engineOptions&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;args&quot;</span>: [<span class="string">&quot;--no-sandbox&quot;</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;asyncCaptureLimit&quot;</span>: <span class="number">5</span>,</span><br><span class="line">    <span class="attr">&quot;asyncCompareLimit&quot;</span>: <span class="number">50</span>,</span><br><span class="line">    <span class="attr">&quot;debug&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">&quot;debugWindow&quot;</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>viewports</td>
+<td>环境尺寸</td>
+</tr>
+<tr>
+<td>scenarios[n].label</td>
+<td>配置别名</td>
+</tr>
+<tr>
+<td>scenarios[n].url</td>
+<td>配置比较url</td>
+</tr>
+</tbody></table>
+<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backstop test</span><br></pre></td></tr></table></figure>
+
+<p>打开页面<br><img src="/2020/08/14/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/UI%E6%B5%8B%E8%AF%95%E4%B9%8Bbackstopjs/2020-08-15-10-21-37.png"><br>如图,提示为设计图缺失,在<code>./backstop_data/bitmaps_reference/</code>目录下补充设计图即可</p>
+<p>同时会生成如下文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;backstop_data</span><br><span class="line">├── bitmaps_reference &#x2F;&#x2F; 设计图,默认没有</span><br><span class="line">│   ├── qqmap_mapindex_0_document_0_phone.png</span><br><span class="line">│   └── qqmap_mapindex_0_document_1_tablet.png</span><br><span class="line">├── bitmaps_test &#x2F;&#x2F; 生成对比结果</span><br><span class="line">│   └── 20200814-230618</span><br><span class="line">│       ├── qqmap_mapindex_0_document_0_phone.png</span><br><span class="line">│       ├── qqmap_mapindex_0_document_1_tablet.png</span><br><span class="line">│       └── report.json</span><br><span class="line">├── engine_scripts</span><br><span class="line">│   ├── cookies.json</span><br><span class="line">│   ├── imageStub.jpg</span><br><span class="line">│   └── puppet</span><br><span class="line">│       ├── clickAndHoverHelper.js</span><br><span class="line">│       ├── ignoreCSP.js</span><br><span class="line">│       ├── interceptImages.js</span><br><span class="line">│       ├── loadCookies.js</span><br><span class="line">│       ├── onBefore.js</span><br><span class="line">│       ├── onReady.js</span><br><span class="line">│       └── overrideCSS.js</span><br><span class="line">└── html_report &#x2F;&#x2F; 报告入口</span><br><span class="line">    ├── a96f14595379b7c348d66e115ec65a93.png</span><br><span class="line">    ├── assets</span><br><span class="line">    │   └── fonts</span><br><span class="line">    │       ├── Lato-Bold.ttf</span><br><span class="line">    │       ├── Lato-Regular.ttf</span><br><span class="line">    │       ├── lato-bold-webfont.woff</span><br><span class="line">    │       ├── lato-bold-webfont.woff2</span><br><span class="line">    │       ├── lato-regular-webfont.woff</span><br><span class="line">    │       └── lato-regular-webfont.woff2</span><br><span class="line">    ├── b815e28b1e230cff6e9d7b749edcd562.png</span><br><span class="line">    ├── config.js</span><br><span class="line">    ├── diff.js</span><br><span class="line">    ├── diverged.js</span><br><span class="line">    ├── divergedWorker.js</span><br><span class="line">    ├── index.html</span><br><span class="line">    └── index_bundle.js</span><br></pre></td></tr></table></figure>
+
+<h2 id="补充完设计图再次运行"><a href="#补充完设计图再次运行" class="headerlink" title="补充完设计图再次运行"></a>补充完设计图再次运行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backstop <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/08/14/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/UI%E6%B5%8B%E8%AF%95%E4%B9%8Bbackstopjs/2020-08-15-10-27-37.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/14/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/UI%E6%B5%8B%E8%AF%95%E4%B9%8Bbackstopjs/" data-id="ckm3ks2rz00alnzx474xxg0qq" data-title="UI测试之backstopjs" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/测试/karma" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/14/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/karma/" class="article-date">
+  <time class="dt-published" datetime="2020-08-14T12:23:59.000Z" itemprop="datePublished">2020-08-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/test/">test</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/08/14/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/karma/">karma</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="install"><a href="#install" class="headerlink" title="install"></a>install</h1><p>karma init</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/14/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/karma/" data-id="ckm3ks2rx00ainzx4ayes0w37" data-title="karma" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/Vue/vue-router原理解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/12/%E5%89%8D%E7%AB%AF/Vue/vue-router%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/" class="article-date">
+  <time class="dt-published" datetime="2020-08-12T14:57:59.000Z" itemprop="datePublished">2020-08-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/08/12/%E5%89%8D%E7%AB%AF/Vue/vue-router%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/">vue-router原理解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Vue-Router 默认是Hash模式, 使用url的hash来模拟一个完整的url,当url改变的时候,页面不会重新加载, 比如: 使用hash模式的话, 那么访问变成 <a target="_blank" rel="noopener" href="http://localhost:8080/page/#/%E8%BF%99%E6%A0%B7%E7%9A%84%E8%AE%BF%E9%97%AE">http://localhost:8080/page/#/这样的访问</a></p>
+<p>但是如果路由使用history的话,那么访问路径变成 如下: <a target="_blank" rel="noopener" href="http://localhost:8080/page/">http://localhost:8080/page/</a></p>
+<p>注意事项:</p>
+<p>如果使用的是history这种模式, 在非首页的情况下刷新页面或直接访问的时候会报404,导致页面丢失</p>
+<p>这是因为他是利用H5 History API 来实现的. 通过history.pushState 方法来实现URL的跳转而无需重新加载页面, 但是它的问题在于刷新页面的时候会走后端路由,相当于直接在浏览器里输入这个地址,要对服务器发起http请求,但是这个目标在服务器上又不存在这个路由,所以会返回404</p>
+<p>解决方式: 需要服务端的辅助来兜底,避免URL无法匹配到资源的时候能返回页面</p>
+<p>Nginx或Node作为服务端的解决方案</p>
+<ol>
+<li>Nginx配置</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">localtion / &#123;</span><br><span class="line">  try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Nodejs配置"><a href="#Nodejs配置" class="headerlink" title="Nodejs配置"></a>Nodejs配置</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> history = <span class="built_in">require</span>(<span class="string">&quot;content-height-history&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> connect = <span class="built_in">require</span>(<span class="string">&quot;connect&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> app = connect().use(history()).listen(<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者使用express</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&quot;express&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.use(history());</span><br></pre></td></tr></table></figure>
+
+<h1 id="hash模式"><a href="#hash模式" class="headerlink" title="hash模式"></a>hash模式</h1><p>默认是 hash模式, 基于浏览器 hash api,使用window.addEventListener(‘hashchange’, callback)对浏览器地址进行监听, 当调用push时, 把新路由添加到浏览器访问历史的栈顶,使用replace时,把浏览器访问历史的栈顶路由替换成新路由</p>
+<h1 id="History模式"><a href="#History模式" class="headerlink" title="History模式"></a>History模式</h1><p>history模式,基于浏览器history api, 使用window.onpopstate 对浏览器地址进行监听,对浏览器history api中pushState(), replaceState() 进行封装,当方法调用,会对浏览器历史栈进行修改, 从而实现URL的跳转而无需重新加载页面,</p>
+<p>但是它的问题在于刷新页面的时候会走后端路由,所以需要服务端的辅助来兜底,避免URL无法匹配到资源时能返回页面</p>
+<h1 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h1><p>不涉及和浏览器地址相关的记录, 流程跟hash模式一样, 通过数组维护模拟浏览器的历史堆栈</p>
+<p>服务端下使用, 使用一个不依赖于浏览器的浏览历史虚拟管理后端,</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>hash 模式和 history 模式都是通过window.addEventListener()方法监听hashchange和 popState 进行相应路由的操作, 可以通过back、forward、go等方法访问浏览器的历史记录栈,进行各种跳转,而abstract模式是自己维护一个模拟的浏览器历史栈的数组.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/12/%E5%89%8D%E7%AB%AF/Vue/vue-router%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/" data-id="ckm3ks2e9008bnzx4c001b30r" data-title="vue-router原理解析" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/Vue/响应式与created和mounted" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/12/%E5%89%8D%E7%AB%AF/Vue/%E5%93%8D%E5%BA%94%E5%BC%8F%E4%B8%8Ecreated%E5%92%8Cmounted/" class="article-date">
+  <time class="dt-published" datetime="2020-08-12T14:57:59.000Z" itemprop="datePublished">2020-08-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/08/12/%E5%89%8D%E7%AB%AF/Vue/%E5%93%8D%E5%BA%94%E5%BC%8F%E4%B8%8Ecreated%E5%92%8Cmounted/">响应式与created和mounted</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;&#123;&#123; a.b &#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            a: &#123;&#125;,</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    created() &#123;</span><br><span class="line">        this.a.b &#x3D;&#123;</span><br><span class="line">          c:1</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted() &#123;</span><br><span class="line">        this.a.b &#x3D; 2;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="答案一-1"><a href="#答案一-1" class="headerlink" title="答案一:1"></a>答案一:1</h1><h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><ol>
+<li>Vue无法检测property的添加或移除.由于Vue会初始化实例时对property执行getter/setter转化,所以property必须在data对象上存在才能让Vue将它转换成响应式的.所以this.a.b中的b是非响应式的</li>
+<li>又因为在created视图未渲染时直接对对象a的属性b赋值data 里面的值会改变的,但是在mounted里面更新this.a.bde值的时候,是非响应式的,所以视图不会更新</li>
+</ol>
+<h1 id="答案二-2"><a href="#答案二-2" class="headerlink" title="答案二:2"></a>答案二:2</h1><h1 id="解析-1"><a href="#解析-1" class="headerlink" title="解析"></a>解析</h1><ol>
+<li>Vue3 使用Proxy代理数据,虽然监听不了孙子节点,但是,在读取子节点的时候使用<code>懒代理</code>的方式监听值的变化,从而可以检测到b的新增,就是b之后还有数据,同样也会监听到</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/12/%E5%89%8D%E7%AB%AF/Vue/%E5%93%8D%E5%BA%94%E5%BC%8F%E4%B8%8Ecreated%E5%92%8Cmounted/" data-id="ckm3ks2eb008hnzx43akc1veb" data-title="响应式与created和mounted" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-操作系统/ssh基本操作" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/09/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ssh%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="article-date">
+  <time class="dt-published" datetime="2020-08-09T14:17:03.000Z" itemprop="datePublished">2020-08-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ssh/">ssh</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/08/09/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ssh%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">ssh基本操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1.启动sshd服务：<br>sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist</p>
+<p>2.停止sshd服务：<br>sudo launchctl unload -w /System/Library/LaunchDaemons/ssh.plist</p>
+<p>3查看是否启动：<br>sudo launchctl list | grep ssh</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/09/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ssh%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" data-id="ckm4x4zr9000t1mx48d5r2vuf" data-title="ssh基本操作" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/JS/clone-deep" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/09/%E5%89%8D%E7%AB%AF/JS/clone-deep/" class="article-date">
+  <time class="dt-published" datetime="2020-08-09T13:46:34.000Z" itemprop="datePublished">2020-08-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/js/">js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/08/09/%E5%89%8D%E7%AB%AF/JS/clone-deep/">cloneDeep</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="普通Clone"><a href="#普通Clone" class="headerlink" title="普通Clone"></a>普通Clone</h1><h1 id="RegexClone"><a href="#RegexClone" class="headerlink" title="RegexClone"></a>RegexClone</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloneReg</span>(<span class="params">target, isDeep</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> regFlag = <span class="regexp">/\w*$/</span>;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="keyword">new</span> target.constructor(target.source, regFlag.exec(target));</span><br><span class="line">    <span class="keyword">if</span> (isDeep) &#123;</span><br><span class="line">        result.lastIndex = <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        result.lastIndex = target.lastIndex;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> regex = <span class="regexp">/yideng/g</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reg2 = cloneReg(regex, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(reg2.test(<span class="string">&quot;yideng&quot;</span>));</span><br><span class="line"><span class="built_in">console</span>.log(reg2.test(<span class="string">&quot;yideng&quot;</span>));</span><br><span class="line"><span class="built_in">console</span>.log(reg2.test(<span class="string">&quot;yideng&quot;</span>));</span><br><span class="line"><span class="built_in">console</span>.log(reg2.test(<span class="string">&quot;yideng&quot;</span>));</span><br><span class="line"><span class="built_in">console</span>.log(reg2.test(<span class="string">&quot;yideng&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h1 id="Buffer克隆"><a href="#Buffer克隆" class="headerlink" title="Buffer克隆"></a>Buffer克隆</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> allocUnsafe = Buffer ? Buffer.allocUnsafe : <span class="literal">undefined</span>;</span><br><span class="line"><span class="keyword">const</span> buf = Buffer.from(<span class="string">&quot;laoyuan&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloneBuffer</span>(<span class="params">buffer, isDeep</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!isDeep) &#123;</span><br><span class="line">        <span class="keyword">return</span> buffer.slice();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> length = buffer.length,</span><br><span class="line">        result = allocUnsafe</span><br><span class="line">            ? allocUnsafe(length)</span><br><span class="line">            : <span class="keyword">new</span> buffer.constructor(length);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> buf2 = cloneBuffer(buf, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">buf2.write(<span class="string">&quot;nodejs&quot;</span>);</span><br><span class="line">buf2.write(<span class="string">&quot;22&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;buf&quot;</span>, buf.toString(<span class="string">&quot;utf-8&quot;</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;buf2&quot;</span>, buf2.toString(<span class="string">&quot;utf-8&quot;</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/09/%E5%89%8D%E7%AB%AF/JS/clone-deep/" data-id="ckm3ks14b002fnzx48qkw77ls" data-title="cloneDeep" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/JS/变量与函数提升" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/08/%E5%89%8D%E7%AB%AF/JS/%E5%8F%98%E9%87%8F%E4%B8%8E%E5%87%BD%E6%95%B0%E6%8F%90%E5%8D%87/" class="article-date">
+  <time class="dt-published" datetime="2020-08-08T14:23:41.000Z" itemprop="datePublished">2020-08-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/js/">js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/08/08/%E5%89%8D%E7%AB%AF/JS/%E5%8F%98%E9%87%8F%E4%B8%8E%E5%87%BD%E6%95%B0%E6%8F%90%E5%8D%87/">变量与函数提升</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>var 变量总是提升到当前函数作用域的顶端</li>
+<li>let，const 为块级作用域，</li>
+</ol>
+<h1 id="变量声明提升"><a href="#变量声明提升" class="headerlink" title="变量声明提升"></a>变量声明提升</h1><h2 id="var与let作用域规则不一样"><a href="#var与let作用域规则不一样" class="headerlink" title="var与let作用域规则不一样"></a>var与let作用域规则不一样</h2><ol>
+<li>var: 变量总是提升到当前函数作用域的顶端</li>
+<li>let: 当前块的作用域</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">varTest</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">2</span>;  <span class="comment">// 同样的变量!</span></span><br><span class="line">    <span class="built_in">console</span>.log(x);  <span class="comment">// 2</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(x);  <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">letTest</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> x = <span class="number">1</span>;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">let</span> x = <span class="number">2</span>;  <span class="comment">// 不同的变量</span></span><br><span class="line">    <span class="built_in">console</span>.log(x);  <span class="comment">// 2</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(x);  <span class="comment">// 1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="let-可以用来创建类的私有属性"><a href="#let-可以用来创建类的私有属性" class="headerlink" title="let 可以用来创建类的私有属性"></a>let 可以用来创建类的私有属性</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Thing;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> privateScope = <span class="keyword">new</span> <span class="built_in">WeakMap</span>();</span><br><span class="line">  <span class="keyword">let</span> counter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  Thing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.someProperty = <span class="string">&#x27;foo&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    privateScope.set(<span class="built_in">this</span>, &#123;</span><br><span class="line">      hidden: ++counter,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  Thing.prototype.showPublic = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.someProperty;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="let-不能重复声明"><a href="#let-不能重复声明" class="headerlink" title="let 不能重复声明"></a>let 不能重复声明</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (x) &#123;</span><br><span class="line">  <span class="keyword">let</span> foo;</span><br><span class="line">  <span class="keyword">let</span> foo; <span class="comment">// SyntaxError thrown.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(x) &#123;</span><br><span class="line">    <span class="keyword">var</span> foo;</span><br><span class="line">    <span class="keyword">var</span> foo;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">switch</span>(x) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">let</span> foo;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    <span class="keyword">let</span> foo; <span class="comment">// SyntaxError for redeclaration.</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="let-const-存在暂存死区"><a href="#let-const-存在暂存死区" class="headerlink" title="let, const 存在暂存死区"></a>let, const 存在<code>暂存死区</code></h2><ol>
+<li>var: 变量提升，会被移动到函数顶端，被初始化为undefined，存在函数堆栈内</li>
+<li>let: 不会变量提升，直至显示赋值才会被加入函数执行堆栈内，在块级作用域开始时，会被放到<code>暂存死区</code>, 无法被引用</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// prints out &#x27;undefined&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> undeclaredVariable);</span><br><span class="line"></span><br><span class="line"><span class="comment">// results in a &#x27;ReferenceError&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> i);</span><br><span class="line"><span class="keyword">let</span> i = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="习题解释"><a href="#习题解释" class="headerlink" title="习题解释"></a>习题解释</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// code01</span></span><br><span class="line"><span class="keyword">let</span> x = <span class="number">1</span>;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">var</span> x = <span class="number">2</span>; <span class="comment">// SyntaxError for re-declaration</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// code02</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> x = <span class="number">2</span>; </span><br><span class="line">  x++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>code01: var 会被提升到函数的顶端， 因此处于同一块级作用域，所以抛异常<code>SyntaxError</code></li>
+<li>code02: ++ 修改的是块级作用域内的 x 的值，所以 外面 x 的值不变</li>
+</ol>
+<h1 id="函数声明提升"><a href="#函数声明提升" class="headerlink" title="函数声明提升"></a>函数声明提升</h1><h2 id="普通提升"><a href="#普通提升" class="headerlink" title="普通提升"></a>普通提升</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hoisted(); <span class="comment">// &quot;foo&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hoisted</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">&quot;foo&quot;</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hoisted; </span><br><span class="line"></span><br><span class="line">hoisted = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;foo&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">hoisted();</span><br></pre></td></tr></table></figure>
+
+<p>相同点:</p>
+<ol>
+<li>var, function 都会被提升</li>
+</ol>
+<p>不同点:</p>
+<ol>
+<li>var 提升在 function 之前</li>
+<li>var 为函数级提升，function 为块级提升</li>
+</ol>
+<h2 id="有条件提升"><a href="#有条件提升" class="headerlink" title="有条件提升"></a>有条件提升</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// code01</span></span><br><span class="line">foo(); <span class="comment">// Uncaught TypeError: foo is not a function</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在Chrome里: </span></span><br><span class="line"><span class="comment">// &#x27;foo&#x27; 变量名被提升，但是 typeof foo 为 undefined</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// 在Firefox里:</span></span><br><span class="line"><span class="comment">// &#x27;foo&#x27; 变量名被提升. 但是 typeof foo 为 undefined</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 在Edge里:</span></span><br><span class="line"><span class="comment">// &#x27;foo&#x27; 变量名未被提升. 而且 typeof foo 为 undefined</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// 在Safari里:</span></span><br><span class="line"><span class="comment">// &#x27;foo&#x27; 变量名被提升. 而且 typeof foo 为 function</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// code02</span></span><br><span class="line">foo(); <span class="comment">//Uncaught ReferenceError: foo is not defined</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>code01: 变量提升，函数未提升，执行undefind(),所以报错：TypeError</li>
+<li>code02: foo 没有被声明，没有找到foo，所以报错： ReferenceError</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/08/%E5%89%8D%E7%AB%AF/JS/%E5%8F%98%E9%87%8F%E4%B8%8E%E5%87%BD%E6%95%B0%E6%8F%90%E5%8D%87/" data-id="ckm3ks1a7004cnzx41z0qgd9i" data-title="变量与函数提升" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTPS/">HTTPS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/JS/">JS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Koa/">Koa</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Promise/">Promise</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/">async</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/await/">await</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci/">ci</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci-cd/">ci/cd</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/db/">db</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/e2e/">e2e</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/node/">node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/test/">test</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue3/">vue3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/">图片</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/">测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/">工具</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/PPT/">PPT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/iterm2/">iterm2</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/markdown/">markdown</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ssh/">ssh</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E7%AE%97%E6%B3%95/">算法</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/" rel="tag">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT/" rel="tag">PPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/" rel="tag">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/await/" rel="tag">await</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/" rel="tag">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci-cd/" rel="tag">ci/cd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db/" rel="tag">db</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/e2e/" rel="tag">e2e</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gogs/" rel="tag">gogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterm2/" rel="tag">iterm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jest/" rel="tag">jest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="tag">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80/" rel="tag">语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTTP/" style="font-size: 11.43px;">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/JS/" style="font-size: 15.71px;">JS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/Promise/" style="font-size: 11.43px;">Promise</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/angularjs/" style="font-size: 12.86px;">angularjs</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/await/" style="font-size: 10px;">await</a> <a href="/tags/ci/" style="font-size: 10px;">ci</a> <a href="/tags/ci-cd/" style="font-size: 10px;">ci/cd</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/e2e/" style="font-size: 10px;">e2e</a> <a href="/tags/error/" style="font-size: 10px;">error</a> <a href="/tags/gogs/" style="font-size: 10px;">gogs</a> <a href="/tags/iterm2/" style="font-size: 10px;">iterm2</a> <a href="/tags/javascript/" style="font-size: 14.29px;">javascript</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/js/" style="font-size: 18.57px;">js</a> <a href="/tags/mac/" style="font-size: 11.43px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.43px;">markdown</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vscode/" style="font-size: 12.86px;">vscode</a> <a href="/tags/vue/" style="font-size: 14.29px;">vue</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a> <a href="/tags/webpack/" style="font-size: 17.14px;">webpack</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">函数式编程</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%9B%BE%E7%89%87/" style="font-size: 10px;">图片</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 12.86px;">框架</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 11.43px;">测试</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 14.29px;">浏览器</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.86px;">算法</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 10px;">组件</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.43px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.43px;">计算机基础</a> <a href="/tags/%E8%AF%AD%E8%A8%80/" style="font-size: 14.29px;">语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/11/ci/ssh/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/circleci/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E7%AE%97%E6%B3%95/LRU%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81%E6%81%A2%E5%A4%8D/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

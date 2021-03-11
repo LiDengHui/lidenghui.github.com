@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/14/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-前端/性能优化/数组分时遍历" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/08/01/%E5%89%8D%E7%AB%AF/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E6%95%B0%E7%BB%84%E5%88%86%E6%97%B6%E9%81%8D%E5%8E%86/" class="article-date">
+  <time class="dt-published" datetime="2019-08-01T14:39:26.000Z" itemprop="datePublished">2019-08-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2019/08/01/%E5%89%8D%E7%AB%AF/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E6%95%B0%E7%BB%84%E5%88%86%E6%97%B6%E9%81%8D%E5%8E%86/">数组分时遍历</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>场景数组遍历大型数组容易卡顿视图操作。
+ </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/08/01/%E5%89%8D%E7%AB%AF/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E6%95%B0%E7%BB%84%E5%88%86%E6%97%B6%E9%81%8D%E5%8E%86/" data-id="ckm3ks2j8009anzx4evzlhh3k" data-title="数组分时遍历" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/Node/npm-安装程序使用国内镜像" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/09/23/%E5%89%8D%E7%AB%AF/Node/npm-%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F/" class="article-date">
+  <time class="dt-published" datetime="2017-09-23T08:09:43.000Z" itemprop="datePublished">2017-09-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2017/09/23/%E5%89%8D%E7%AB%AF/Node/npm-%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F/">npm 安装程序使用国内镜像</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>之前安装npm是使用了cnpm或者切换了源，但是依然有一部分东西下载走得国外的链接，所以，在这里我们讲持续更新.npmrc 的路径以帮助优化使用npm</p>
+<h2 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h2><p>一般国内人使用npm比较慢，所以很多人都装了cnpm，但是cnpm一方面模块之间的依赖可能会不好，另一方面，重复下载很多无用的文件（@开头的）:所以这里介绍一种跟好更方便的方式：</p>
+<pre><code>npm intall -g nrm
+</code></pre>
+<p><code>nrm</code> 是用来切换npm源的一个工具。切过去之后可以很方便的切换回来，比如我要使用cnpm的镜像：</p>
+<p>  <img src="/2017/09/23/%E5%89%8D%E7%AB%AF/Node/npm-%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F/nrmuse.png" alt="nrm use taobao"></p>
+<p>但是我觉得还是不满足，在这里推荐另外一中包安装工具<code>yarn</code>，它有一大优势就是不用每次都去远程服务器上取包，他会在本地保存一部分，当我们安装包的使用，直接copy一份就好。</p>
+<pre><code>npm install -g yarn
+</code></pre>
+<p>同样的yarn也存在换源的问题。同样的也从在一个包<code>yrm</code>来支持换源。</p>
+<pre><code>npm install -g yrm
+</code></pre>
+<p>换源：</p>
+<p>  <img src="/2017/09/23/%E5%89%8D%E7%AB%AF/Node/npm-%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F/yrmuse.png" alt="yrm use taobao"></p>
+<h2 id="添加cdnurl"><a href="#添加cdnurl" class="headerlink" title="添加cdnurl"></a>添加cdnurl</h2><p>如：chromedirver下载老是使用google的下载地址，但在国内使用很不方便，于是在安装chromedirver，就要运行命令：</p>
+<pre><code>  npm install chromedriver --chromedriver_cdnurl=http://npm.taobao.org/mirrors/chromedriver --CHROMEDRIVER_VERSION=2.25
+</code></pre>
+<p>但是在项目里并不是一个人来开发，所以不可能每个人都运行这样一条命令或写成shell，太low。</p>
+<p>所以，这里提供更专业一点的办法，在package.json的更目录建立<code>.npmrc</code>的文件。内部加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">chromedriver_cdnurl&#x3D;http:&#x2F;&#x2F;npm.taobao.org&#x2F;mirrors&#x2F;chromedriver</span><br><span class="line">selenium_cdnurl&#x3D;http:&#x2F;&#x2F;npm.taobao.org&#x2F;mirrorss&#x2F;selenium</span><br><span class="line">phantomjs_cdnurl&#x3D;http:&#x2F;&#x2F;npm.taobao.org&#x2F;mirrors&#x2F;phantomjs</span><br><span class="line">electron_mirror&#x3D;https:&#x2F;&#x2F;npm.taobao.org&#x2F;mirrors&#x2F;electron</span><br><span class="line">node_sassurl&#x3D;http:&#x2F;&#x2F;npm.taobao.org&#x2F;mirrors&#x2F;node_sass</span><br><span class="line">puppeteer_cdnurl&#x3D;http:&#x2F;&#x2F;npm.taobao.org&#x2F;mirrors&#x2F;puppeteer</span><br></pre></td></tr></table></figure>
+<p>后面的链接可以更改成其他的镜像文件，也可以（需要什么加什么）。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/09/23/%E5%89%8D%E7%AB%AF/Node/npm-%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F/" data-id="ckm3ks1g8005fnzx44pobako5" data-title="npm 安装程序使用国内镜像" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/CSS/css优先级" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/06/15/%E5%89%8D%E7%AB%AF/CSS/css%E4%BC%98%E5%85%88%E7%BA%A7/" class="article-date">
+  <time class="dt-published" datetime="2017-06-15T07:19:01.000Z" itemprop="datePublished">2017-06-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2017/06/15/%E5%89%8D%E7%AB%AF/CSS/css%E4%BC%98%E5%85%88%E7%BA%A7/">css优先级</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>important  &gt;  id &gt;  class &gt;  *</p>
+<p><img src="/2017/06/15/%E5%89%8D%E7%AB%AF/CSS/css%E4%BC%98%E5%85%88%E7%BA%A7/css%E4%BC%98%E5%85%88%E7%BA%A7.png" alt="logo"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/06/15/%E5%89%8D%E7%AB%AF/CSS/css%E4%BC%98%E5%85%88%E7%BA%A7/" data-id="ckm3ks0tl000nnzx41f2v1s9f" data-title="css优先级" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/组件化/组件所思" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/06/12/%E5%89%8D%E7%AB%AF/%E7%BB%84%E4%BB%B6%E5%8C%96/%E7%BB%84%E4%BB%B6%E6%89%80%E6%80%9D/" class="article-date">
+  <time class="dt-published" datetime="2017-06-12T02:45:04.000Z" itemprop="datePublished">2017-06-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2017/06/12/%E5%89%8D%E7%AB%AF/%E7%BB%84%E4%BB%B6%E5%8C%96/%E7%BB%84%E4%BB%B6%E6%89%80%E6%80%9D/">组件所思</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="组件特点"><a href="#组件特点" class="headerlink" title="组件特点"></a>组件特点</h1><ol>
+<li>标准化: 模块是具有标准尺寸和标准接口的预制功能单元，这是组装、互换等特征的基础；</li>
+<li>可组装：多个模块可以方便、灵活地组合、配置，以构造不同大小、不同形状、不同功能的系统;</li>
+<li>可替换：通过用一个模块去更换另一个模块，可以改变系统的局部功能而不影响系 统的其他部分；</li>
+<li>可维护：可以对模块进行局部修改或设置，以满足用户需求，另外可以增加新模块，扩展系统功能</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/06/12/%E5%89%8D%E7%AB%AF/%E7%BB%84%E4%BB%B6%E5%8C%96/%E7%BB%84%E4%BB%B6%E6%89%80%E6%80%9D/" data-id="ckm3ks2wh00bmnzx44bnd56x3" data-title="组件所思" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/Node/npm-install-时总是报phantomjs-prebuilt-2-1-14安装失败" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/03/27/%E5%89%8D%E7%AB%AF/Node/npm-install-%E6%97%B6%E6%80%BB%E6%98%AF%E6%8A%A5phantomjs-prebuilt-2-1-14%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5/" class="article-date">
+  <time class="dt-published" datetime="2017-03-27T02:54:00.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2017/03/27/%E5%89%8D%E7%AB%AF/Node/npm-install-%E6%97%B6%E6%80%BB%E6%98%AF%E6%8A%A5phantomjs-prebuilt-2-1-14%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5/">npm install 时总是报phantomjs-prebuilt@2.1.14安装失败</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><pre><code>    npm install phantomjs-prebuilt@2.1.14 --ignore-scripts
+    
+</code></pre>
+<p>npm install 时总是报<a href="mailto:&#x70;&#104;&#x61;&#x6e;&#116;&#x6f;&#109;&#x6a;&#115;&#x2d;&#112;&#114;&#101;&#x62;&#x75;&#x69;&#108;&#x74;&#64;&#x32;&#46;&#x31;&#x2e;&#x31;&#x34;">&#x70;&#104;&#x61;&#x6e;&#116;&#x6f;&#109;&#x6a;&#115;&#x2d;&#112;&#114;&#101;&#x62;&#x75;&#x69;&#108;&#x74;&#64;&#x32;&#46;&#x31;&#x2e;&#x31;&#x34;</a>安装失败</p>
+<p>在npm install时总是报如下错误，</p>
+<p>尝试单独安装：npm install <a href="mailto:&#x70;&#104;&#97;&#x6e;&#x74;&#x6f;&#x6d;&#106;&#x73;&#45;&#112;&#x72;&#x65;&#98;&#x75;&#x69;&#108;&#x74;&#64;&#x32;&#46;&#x31;&#x2e;&#x31;&#x34;">&#x70;&#104;&#97;&#x6e;&#x74;&#x6f;&#x6d;&#106;&#x73;&#45;&#112;&#x72;&#x65;&#98;&#x75;&#x69;&#108;&#x74;&#64;&#x32;&#46;&#x31;&#x2e;&#x31;&#x34;</a> 还是报错</p>
+<p>Please report this full log at <a target="_blank" rel="noopener" href="https://github.com/Medium/phantomjs">https://github.com/Medium/phantomjs</a></p>
+<p>npm ERR! Darwin 15.0.0</p>
+<p>npm ERR! argv “/usr/local/bin/node” “/usr/local/bin/npm” “install”</p>
+<p>npm ERR! node v4.4.3</p>
+<p>npm ERR! npm  v3.10.9</p>
+<p>npm ERR! code ELIFECYCLE</p>
+<p>npm ERR! <a href="mailto:&#x70;&#104;&#97;&#x6e;&#116;&#111;&#109;&#106;&#115;&#x2d;&#x70;&#x72;&#x65;&#x62;&#x75;&#x69;&#x6c;&#x74;&#x40;&#x32;&#x2e;&#x31;&#46;&#49;&#52;">&#x70;&#104;&#97;&#x6e;&#116;&#111;&#109;&#106;&#115;&#x2d;&#x70;&#x72;&#x65;&#x62;&#x75;&#x69;&#x6c;&#x74;&#x40;&#x32;&#x2e;&#x31;&#46;&#49;&#52;</a> install: <code>node install.js</code></p>
+<p>npm ERR! Exit status 1</p>
+<p>npm ERR! </p>
+<p>npm ERR! Failed at the <a href="mailto:&#x70;&#x68;&#97;&#x6e;&#116;&#111;&#x6d;&#x6a;&#115;&#x2d;&#x70;&#x72;&#x65;&#x62;&#x75;&#105;&#108;&#116;&#64;&#50;&#46;&#49;&#x2e;&#49;&#x34;">&#x70;&#x68;&#97;&#x6e;&#116;&#111;&#x6d;&#x6a;&#115;&#x2d;&#x70;&#x72;&#x65;&#x62;&#x75;&#105;&#108;&#116;&#64;&#50;&#46;&#49;&#x2e;&#49;&#x34;</a> install script ‘node install.js</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/03/27/%E5%89%8D%E7%AB%AF/Node/npm-install-%E6%97%B6%E6%80%BB%E6%98%AF%E6%8A%A5phantomjs-prebuilt-2-1-14%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5/" data-id="ckm3ks1g5005cnzx48gmq1iq6" data-title="npm install 时总是报phantomjs-prebuilt@2.1.14安装失败" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/error/" rel="tag">error</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-工具/Atom/Atom-编辑器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/02/26/%E5%B7%A5%E5%85%B7/Atom/Atom-%E7%BC%96%E8%BE%91%E5%99%A8/" class="article-date">
+  <time class="dt-published" datetime="2017-02-26T12:03:58.000Z" itemprop="datePublished">2017-02-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2017/02/26/%E5%B7%A5%E5%85%B7/Atom/Atom-%E7%BC%96%E8%BE%91%E5%99%A8/">Atom 编辑器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Atom"><a href="#Atom" class="headerlink" title="Atom"></a>Atom</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/u010494080/article/details/50605654">Atom使用说名</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/cynthia-wuqian/p/5017153.html">Atom插件安装及常用插件</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/02/26/%E5%B7%A5%E5%85%B7/Atom/Atom-%E7%BC%96%E8%BE%91%E5%99%A8/" data-id="ckm3knt090001mtx4gmjz30kj" data-title="Atom 编辑器" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-git/git-submodule" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/02/25/git/git-submodule/" class="article-date">
+  <time class="dt-published" datetime="2017-02-25T14:42:27.000Z" itemprop="datePublished">2017-02-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2017/02/25/git/git-submodule/">git submodule</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>开发过程中，经常会有一些通用的部分希望抽取出来做成一个公共库来提供给别的工程来使用，而公共代码库的版本管理是个麻烦的事情。今天无意中发现了Git的git submodule命令，之前的问题迎刃而解了。<br>添加<br>为当前工程添加submodule，命令如下：</p>
+<pre><code>    git submodule add 仓库地址 路径
+    
+</code></pre>
+<p>其中，仓库地址是指子模块仓库地址，路径指将子模块放置在当前工程下的路径。<br>注意：路径不能以 / 结尾（会造成修改不生效）、不能是现有工程已有的目录（不能順利 Clone）<br>命令执行完成，会在当前工程根路径下生成一个名为“.gitmodules”的文件，其中记录了子模块的信息。添加完成以后，再将子模块所在的文件夹添加到工程中即可。<br>删除<br>submodule的删除稍微麻烦点：首先，要在“.gitmodules”文件中删除相应配置信息。然后，执行“git rm –cached ”命令将子模块所在的文件从git中删除。<br>下载的工程带有submodule<br>当使用git clone下来的工程中带有submodule时，初始的时候，submodule的内容并不会自动下载下来的，此时，只需执行如下命令：</p>
+<pre><code>    git submodule update --init --recursive
+</code></pre>
+<p>即可将子模块内容下载下来后工程才不会缺少相应的文件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/02/25/git/git-submodule/" data-id="ckm4x8rjj0022kex46ua068nq" data-title="git submodule" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-git/gogs-之-docker-ssh-通信（mac）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/02/25/git/gogs-%E4%B9%8B-docker-ssh-%E9%80%9A%E4%BF%A1%EF%BC%88mac%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2017-02-25T14:18:25.000Z" itemprop="datePublished">2017-02-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2017/02/25/git/gogs-%E4%B9%8B-docker-ssh-%E9%80%9A%E4%BF%A1%EF%BC%88mac%EF%BC%89/">gogs 之 docker ssh 通信（mac）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>打算用docker布置一下gogs，用来给公司建立代码库</p>
+<p>在连接ssh时遇到要输入密码的问题</p>
+<p>后来才发线 docker 在配置gogs是会对端口进行映射导致端口被改变所以需要用./ssh/config,来更改配置的端口号修改代码如下 ~/.ssh/config</p>
+<pre><code>    Host    www.macl.com
+
+    Port    32781
+</code></pre>
+<p>然后再下载：</p>
+<pre><code>    git clone git@www.macl.com:lidenghui/test.git
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2017/02/25/git/gogs-%E4%B9%8B-docker-ssh-%E9%80%9A%E4%BF%A1%EF%BC%88mac%EF%BC%89/" data-id="ckm4x8rjk0023kex4d06c1wsm" data-title="gogs 之 docker ssh 通信（mac）" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gogs/" rel="tag">gogs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端/JS/js位运算" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/11/21/%E5%89%8D%E7%AB%AF/JS/js%E4%BD%8D%E8%BF%90%E7%AE%97/" class="article-date">
+  <time class="dt-published" datetime="2016-11-21T03:35:45.000Z" itemprop="datePublished">2016-11-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/11/21/%E5%89%8D%E7%AB%AF/JS/js%E4%BD%8D%E8%BF%90%E7%AE%97/">js位运算</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>我们可能很少在编程中用位运算，如果没深入学习，可能也很难理解。平时的数值运算，其实是要先转换成二进制再进行运算的，而位运算就是直接进行二进制运算，所以位运算的执行效率肯定是更高的。下面通过一些实例来加深对位运算的理解。</p>
+<h1 id="按位与-amp"><a href="#按位与-amp" class="headerlink" title="按位与(&amp;)"></a>按位与(&amp;)</h1><p>&amp;&amp;运算符我们都知道，只有两个都为真，结果才为真。&amp;道理是一样的，只有两个数的值为1时，才返回1。例如1和3的按位与操作：</p>
+<pre><code>                0001
+             &amp;  0011
+            ---------
+                0001
+</code></pre>
+<p>只有对应的数为1时，结果才为1，其他都为0。判断一个数是奇数还是偶数，我们会用求余数来判断：</p>
+<pre><code>    function assert(n) &#123;
+            if (n % 2 === 1) &#123;
+        console.log(&quot;n是奇数&quot;);
+        &#125; else &#123;
+        console.log(&quot;n是偶数&quot;);
+        &#125;
+    &#125;
+    assert(3); // &quot;n是奇数&quot;
+</code></pre>
+<p>我们也可以用一个数和1进行按位&amp;操作来判断，而且速度更快：</p>
+<pre><code>    function assert(n) &#123;
+    if (n &amp; 1) &#123;
+        console.log(&quot;n是奇数&quot;);
+    &#125; else &#123;
+        console.log(&quot;n是偶数&quot;);
+    &#125;
+    &#125;
+    assert(3); // &quot;n是奇数&quot;
+</code></pre>
+<p>下面是位运算过程：</p>
+<pre><code>             1 = 0001
+             3 = 0011
+             --------
+             &amp; = 0001
+</code></pre>
+<p>奇数的二进制码的最后一位数肯定是1，而1只有最后一位为1，按位&amp;操作之后，结果肯定只有最后一位数为1。而偶数的二进制表示的最后一位数是0，和1进行按位&amp;操作，结果所有位数都为0。</p>
+<h1 id="按位或"><a href="#按位或" class="headerlink" title="按位或(|)"></a>按位或(|)</h1><p>|与||操作符的道理也是一样的，只要两个数中有一个数为1，结果就为1，其他则为0。</p>
+<pre><code>                0001
+             |  0011
+            ---------
+                0011
+</code></pre>
+<p>对浮点数向下求整，我们会用下面的方法：</p>
+<pre><code>    var num = Math.floor(1.1); // 1
+</code></pre>
+<p>我们也可以用位运算来求整：</p>
+<pre><code>    var num = 1.1 | 0; // 1
+</code></pre>
+<p>其实浮点数是不支持位运算的，所以会先把1.1转成整数1再进行位运算，就好像是对浮点数向下求整。所以1|0的结果就是1。</p>
+<h1 id="按位非"><a href="#按位非" class="headerlink" title="按位非(~)"></a>按位非(~)</h1><p>按位非就是求二进制的反码：</p>
+<pre><code>    var num = 1; // 二进制 00000000000000000000000000000001
+    var num1 = ~num; // 二进制 11111111111111111111111111111110
+</code></pre>
+<p>我们知道，js中的数字默认是有符号的。有符号的32位二进制的最高位也就是第一位数字代表着正负，1代表负数，0代表整数。那到底 等于多少呢？最高位为1代表负数，负数的二进制转化为十进制：符号位不变，其他位取反加1。取反之后为 ，加1之后为 ，十进制为-2。</p>
+<h1 id="按位异或"><a href="#按位异或" class="headerlink" title="按位异或(^)"></a>按位异或(^)</h1><p>按位异或是两个数中只有一个1时返回1，其他情况返回0。</p>
+<pre><code>                0001
+             ^  0011
+            ---------
+                0010
+</code></pre>
+<p>数字与数字本身按位异或操作得到的是0，因为每两个对应的数字都相同，所以最后返回的都是0。</p>
+<p>我们经常会需要调换两个数字的值：</p>
+<pre><code>    var num1 = 1, num2 = 2, temp;
+    temp = num1;
+    num1 = num2; // 2
+    num2 = temp; // 1
+</code></pre>
+<p>如果装逼一点的话，可以这样：</p>
+<pre><code>    var num1 = 1, num2 = 2;
+    num1 = [num2, num2 = num1][0];
+    console.log(num1); // 2
+    console.log(num2); // 1
+</code></pre>
+<p>如果想再装的稳一点的话，可以这样：</p>
+<pre><code>    var num1 = 1, num2 = 2;
+    num1 ^= num2; // num1 = num1 ^ num2 = 1 ^ 2 = 3
+    num2 ^= num1; // num2 = num2 ^ (num1 ^ num2) = 2 ^ (1 ^ 2) = 1
+    num1 ^= num2; // num1 = num1 ^ num2 = 3 ^ 1 = 2
+    console.log(num1); // 2
+    console.log(num2); // 1
+</code></pre>
+<h1 id="有符号左移-lt-lt"><a href="#有符号左移-lt-lt" class="headerlink" title="有符号左移(&lt;&lt;)"></a>有符号左移(&lt;&lt;)</h1><p>有符号左移会将32位二进制数的所有位向左移动指定位数。如：</p>
+<pre><code>    var num = 2; // 二进制10
+    num = num &lt;&lt; 5; // 二进制1000000，十进制64
+</code></pre>
+<p>如果要求2的n次方，可以这样：</p>
+<pre><code>    function power(n) &#123;
+        return 1 &lt;&lt; n;
+    &#125;
+
+    power(5); // 32
+</code></pre>
+<p>1的二进制是01，左移5位就是0100000，十进制就是2的5次方32。</p>
+<h1 id="有符号右移-gt-gt"><a href="#有符号右移-gt-gt" class="headerlink" title="有符号右移(&gt;&gt;)"></a>有符号右移(&gt;&gt;)</h1><p>有符号右移会将32位二进制数的所有位向右移动指定位数。如：</p>
+<pre><code>    var num = 64; // 二进制1000000
+    num = num &gt;&gt; 5; // 二进制10，十进制2
+</code></pre>
+<p>求一个数的二分之一：</p>
+<pre><code>var num = 64 &gt;&gt; 1; // 32
+</code></pre>
+<p>有符号左移与右移不会影响符号位。</p>
+<h1 id="无符号右移-gt-gt-gt"><a href="#无符号右移-gt-gt-gt" class="headerlink" title="无符号右移(&gt;&gt;&gt;)"></a>无符号右移(&gt;&gt;&gt;)</h1><p>正数的无符号右移与有符号右移结果是一样的。负数的无符号右移会把符号位也一起移动，而且无符号右移会把负数的二进制码当成正数的二进制码：</p>
+<pre><code>    var num = -64; // 11111111111111111111111111000000
+    num = num &gt;&gt;&gt; 5; // 134217726
+</code></pre>
+<p>所以，我们可以利用无符号右移来判断一个数的正负：</p>
+<pre><code>    function isPos(n) &#123;
+    return (n === (n &gt;&gt;&gt; 0)) ? true : false;     
+    &#125;
+
+    isPos(-1); // false
+    isPos(1); // true
+</code></pre>
+<p>-1&gt;&gt;&gt;0虽然没有向右移动位数，但-1的二进制码已经变成了正数的二进制码：</p>
+<p>所以-1&gt;&gt;&gt;0的值为4294967295。</p>
+<p>总结</p>
+<p>以上的例子在平常可能会比较容易用到或看到，也是属于比较容易理解的。一些比较复杂的、难理解的，我觉得应该尽量少用，因为会给阅读者带来困难，也会给自己带来麻烦。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/11/21/%E5%89%8D%E7%AB%AF/JS/js%E4%BD%8D%E8%BF%90%E7%AE%97/" data-id="ckm3ks17q003pnzx47u3q78py" data-title="js位运算" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-工具/vs-code/visual-studio-code-terminal-command" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/11/07/%E5%B7%A5%E5%85%B7/vs-code/visual-studio-code-terminal-command/" class="article-date">
+  <time class="dt-published" datetime="2016-11-07T09:32:11.000Z" itemprop="datePublished">2016-11-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/11/07/%E5%B7%A5%E5%85%B7/vs-code/visual-studio-code-terminal-command/">visual studio code terminal command</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>之前一直用sublime text 但是sublime text在linux 上的中文输入问题一直让人很蛋疼，前两天刚看了一个博客发现了一个和sublime text 差不多的一个开发编辑器。于是就打算试试，感觉还不错就推荐一下</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="命令行启动"><a href="#命令行启动" class="headerlink" title="命令行启动"></a>命令行启动</h2><blockquote>
+<p>linux 直接使用 <code>code &#123;文件名&#125;</code>打开对应的文件</p>
+</blockquote>
+<blockquote>
+<p>mac 上没有 <code>code</code> 命令需要自己安装</p>
+</blockquote>
+<ol>
+<li><p>按下<code>Command + Shift + P</code></p>
+</li>
+<li><p>输入<code>shell</code></p>
+</li>
+<li><p>选择<code>Shell Command : Install code in PATH</code>，这样自动安装<code>code</code>命令行启动</p>
+</li>
+</ol>
+<h2 id="root启动"><a href="#root启动" class="headerlink" title="root启动"></a>root启动</h2><blockquote>
+<p>linux 上使用 <code>sudo code &#123;文件名&#125;</code> 会报错</p>
+</blockquote>
+<pre><code>    It is recommended to start vscode as a normal user. To run as root, you must specify an alternate user data directory with the --user-data-dir argument.
+</code></pre>
+<p>所以要加上 <code>sudo code --user-data-dir=/</code>,之后会有一个空目录，选择要打开的文件或目录即可</p>
+<h2 id="git"><a href="#git" class="headerlink" title="git"></a>git</h2><blockquote>
+<p>如果要使用编辑器自带的git工具需要安装git，mac由于使用的是Xcode的git命令，需要安装Xcode之后才能使用。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/11/07/%E5%B7%A5%E5%85%B7/vs-code/visual-studio-code-terminal-command/" data-id="ckm3knt0x000umtx42ezy6kbr" data-title="visual studio code terminal command" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/13/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/15/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/">前端</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/HTTPS/">HTTPS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/JS/">JS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Koa/">Koa</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Promise/">Promise</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/">async</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/async/await/">await</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci/">ci</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/ci-cd/">ci/cd</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/db/">db</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/e2e/">e2e</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/mac/">mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/node/">node</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/test/">test</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/vue3/">vue3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E5%9B%BE%E7%89%87/">图片</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8B%E8%AF%95/">测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/">工具</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/PPT/">PPT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/iterm2/">iterm2</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7/markdown/">markdown</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/ssh/">ssh</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/%E7%AE%97%E6%B3%95/">算法</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/" rel="tag">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT/" rel="tag">PPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/" rel="tag">angularjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/async/" rel="tag">async</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/await/" rel="tag">await</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/" rel="tag">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci-cd/" rel="tag">ci/cd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/db/" rel="tag">db</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/e2e/" rel="tag">e2e</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gogs/" rel="tag">gogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterm2/" rel="tag">iterm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jest/" rel="tag">jest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3/" rel="tag">vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" rel="tag">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80/" rel="tag">语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/HTTP/" style="font-size: 11.43px;">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 10px;">HTTPS</a> <a href="/tags/JS/" style="font-size: 15.71px;">JS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/Promise/" style="font-size: 11.43px;">Promise</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/angularjs/" style="font-size: 12.86px;">angularjs</a> <a href="/tags/async/" style="font-size: 10px;">async</a> <a href="/tags/await/" style="font-size: 10px;">await</a> <a href="/tags/ci/" style="font-size: 10px;">ci</a> <a href="/tags/ci-cd/" style="font-size: 10px;">ci/cd</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/e2e/" style="font-size: 10px;">e2e</a> <a href="/tags/error/" style="font-size: 10px;">error</a> <a href="/tags/gogs/" style="font-size: 10px;">gogs</a> <a href="/tags/iterm2/" style="font-size: 10px;">iterm2</a> <a href="/tags/javascript/" style="font-size: 14.29px;">javascript</a> <a href="/tags/jest/" style="font-size: 10px;">jest</a> <a href="/tags/js/" style="font-size: 18.57px;">js</a> <a href="/tags/mac/" style="font-size: 11.43px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.43px;">markdown</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/vscode/" style="font-size: 12.86px;">vscode</a> <a href="/tags/vue/" style="font-size: 14.29px;">vue</a> <a href="/tags/vue3/" style="font-size: 10px;">vue3</a> <a href="/tags/webpack/" style="font-size: 17.14px;">webpack</a> <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">函数式编程</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%9B%BE%E7%89%87/" style="font-size: 10px;">图片</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 12.86px;">框架</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 11.43px;">测试</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 14.29px;">浏览器</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.86px;">算法</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 10px;">组件</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.43px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.43px;">计算机基础</a> <a href="/tags/%E8%AF%AD%E8%A8%80/" style="font-size: 14.29px;">语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/11/ci/ssh/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/ci/circleci/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E7%AE%97%E6%B3%95/LRU%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/11/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81%E6%81%A2%E5%A4%8D/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
